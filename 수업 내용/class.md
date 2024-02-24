@@ -1271,3 +1271,148 @@ public class StaticEx_p273 {
 3. java.lang package는 기본적으로 내장되어 import 되어있음, 그 외 패키지는 import
 4. 패키지 내 모든 클래스 사용 : import 상위패키지.하위패키지.*;
 	- import java.util.*는 util 패키지 내 모든 클래스를 import를 하는 것이지 다른 util package까지 import 하는 것이 아님
+
+
+-----
+### 제어자 (Modifier)
+-----
+1. 클래스, 변수, 메서드의 선언부에 사용되어 부가적 의미를 지님
+2. 접근 제어자와 그 외의 제어자로 나누어짐
+3. 하나의 대상에 여러 개의 제어자를 조합해서 사용 가능, 접근 제어자는 단 하나만 사용 가능
+
+-----
+### static
+-----
+1. ‘클래스의, 공통적인, 정적인’
+2. 멤버변수, 메서드, 초기화 블럭에 사용 가능 → 정적 필드/메소드(멤버)  
+3. 이미 클래스는 JVM에 의해 실행될 때, 자동적으로 클래스가 로딩되었으므로 인스턴스를 생성하지 않고 가능
+
+    → 클래스명.필드/메소드()로 접근 가능 (클래스 수준의 멤버로 사용)
+
+4. 클래스명의 모든 인스턴스들이 공유하게 됨
+
+    ↔ 인스턴스 필드/메서드 : Static과 반대되는 개념으로 객체를 생성할 때, 힙 영역에 생성되는 인스턴스(객체)의 필드/메서드
+
+<div align = "center">
+<img width="367" alt="1234" src="https://github.com/sooyounghan/JAVA/assets/34672301/a655141e-bfae-4022-a7cd-85e07ca62068">
+</div>
+
+< Game Class >
+```java
+import java.util.Random; // Random Class import
+
+/*
+ * 1 ~ 100까지 임의의 숫자 맞추기 게임
+ *  - Player : Me, Computer
+ *  - 정해진 횟수(5회)동안 높은 숫자를 제시하는 사람이 승리하는 게임
+ *  - 정해진 횟수(5회)동안 많이 이긴 사람이 승리하는 게임
+ */
+public class Game {
+	/*
+	 * Field
+	 *  - Data
+	 *  - [Access Modifier][Modifier] DataType Field_Name [= Value];
+	 *  - 클래스에서 객체 생성 후 사용하기 위한 데이터
+	 */
+	
+	/*
+	 * static Keyword는 클래스이름.필드명/메소드명()으로 접근 가능
+	 *   : 클래스 수준의 멤버로 사용
+	 *   -> 클래스명의 모든 인스턴스들이 공유
+	 */
+	static String game_name = "나 vs 컴퓨터의 숫자 맞추기"; // game_name은 어떠한 객체를 생성해도 항상 동일한 필드 -> 클래스 변수 static 설정
+	
+	private int myScore; // 임의로 나온 나의 숫자 (이 상황에서는 static 생략 가능)
+	private int comScore; // 임의로 나온 컴퓨터의 숫자 (이 상황에서는 static 생략 가능)
+	
+	/*
+	 * Constructor 
+	 *  - [Access Modifier] Class_name (Argument list) {
+	 *  		Statement;
+	 *  	}
+	 *  - 외부에서 데이터를 받아서 객체 생성 시 초기화 작업을 주로 담당
+	 */
+	// 이 클래스에서는 생성자를 구현하지 않고, 기본 생성자로 처리 가능
+	
+	/*
+	 * Method
+	 *   - 기능, 동작
+	 *   - [Access Modifier][Modifier] Method_Name(Argument list) {
+	 *   		statement;
+	 *   		return ~;
+	 *   }
+	 */
+	void play() { // 숫자 맞추기 게임 시작
+		for(int i = 0; i < 5; i++) { // 5회 반복
+			Random random = new Random();
+			// int myNum = (int)(Math.random() * 100) + 1; // 내 수는 0 ~ 100까지 임의의 수 생성
+			int myNum = random.nextInt(100) + 1;  // 1 ~ 100까지 난수 생성	
+			// int comNum = (int)(Math.random() * 100) + 1; // 컴퓨터 수도 0 ~ 100까지 임의의 수 생성
+			int comNum = random.nextInt(100) + 1; // 1 ~ 100까지 난수 생성	
+			
+			if(myNum > comNum) { // 내 수가 더 높다면
+				myScore++; // 내 점수는 증가
+				System.out.println("My Number : " + myNum); // 내 점수
+				System.out.println("Computer Number : " + comNum); // 컴퓨터 점수
+				System.out.println("My win (My Score +1!)"); // 내가 이겼는지, 졌는지, 비겼는지 확인하기 출력문
+				System.out.println();
+			}
+			else if(myNum < comNum) { // 컴퓨터의 수가 더 높다면
+				comScore++; // 컴퓨터 점수는 증가
+				System.out.println("My Number : " + myNum); // 내 점수
+				System.out.println("Computer Number : " + comNum); // 컴퓨터 점수
+				System.out.println("Computer win(Computer Score +1)");  // 내가 이겼는지, 졌는지, 비겼는지 확인하기 출력문
+				System.out.println();
+			}
+			else {
+				
+				System.out.println("My Number : " + myNum); // 내 점수
+				System.out.println("Computer Number : " + comNum); // 컴퓨터 점수
+				System.out.println("Draw.. (Not Score)");  // 내가 이겼는지, 졌는지, 비겼는지 확인하기 출력문	
+				System.out.println();
+			}
+		}
+	}
+	
+	void displayGameResult() { // 게임 결과 출력
+		System.out.println("-------------<Score>------------");
+		System.out.println("My Score = " + myScore); // 내 점수
+		System.out.println("Com Score = " + comScore); // 컴퓨터의 점수
+		
+		System.out.println("-------------<Result>------------"); // 결과
+		if(myScore > comScore) {
+			System.out.println("My Victory!"); // 내 점수가 컴퓨터 점수보다 높을 경우
+		}
+		else if(myScore < comScore) {
+			System.out.println("Computer Victory!"); // 컴퓨터 점수가 내 점수보다 높을 경우
+		}
+		else {
+			System.out.println("Me and Computer draw"); // 컴퓨터 점수와 내 점수가 같을 경우
+		}
+	}
+}
+```
+
+< Main >
+```java
+/*
+ * Game을 실행하는 Main Class / Method
+ */
+public class Game_Main {
+	public static void main(String[] args) {
+		Game game = new Game(); // Game을 하기 위한 Game 객체 생성
+		
+		System.out.println("--------< " + Game.game_name + " >--------"); // static 변수이므로 클래스명.필드명 
+		game.play(); // 게임 시작
+		game.displayGameResult(); // 게임 결과 출력
+		
+		System.out.println();
+		
+		Game game2 = new Game(); // 2번째 게임 시작
+
+		System.out.println("--------< " + Game.game_name + " >---------"); // static 변수이므로 클래스명.필드명
+		game2.play(); // 게임 시작
+		game2.displayGameResult(); // 게임 결과 출력
+	}
+}
+```
