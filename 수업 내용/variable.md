@@ -407,3 +407,96 @@ public class BoxingUnboxing_p500 {
 	}
 }
 ```
+-----
+### 지역 변수와 전역 변수
+-----
+  1. 지역 변수 (Local Variable) : 지역 변수는 변수가 사용되는 특정 Block내에서만 사용 가능
+   - 초기값이 반드시 설정되어야함
+     
+   < 변수의 초기값 >
+   <div align = "center">
+   <img width="394" alt="제목 없음" src="https://github.com/sooyounghan/JAVA/assets/34672301/3d5f26fa-25d2-4ce7-a0d3-1e8ee8f97523">
+   </div>
+
+   2. 전역 변수 (Gloabal Variable) : Class Block에서 선언
+     - Field(=Global Variable) : Class내 선언된 변수
+     
+   <div align = "center">
+   <img width="394" alt="제목 없음" src = "https://github.com/sooyounghan/JAVA/assets/34672301/ef9a7707-5907-4f01-bb0d-9f4b8632bd15">
+   </div>
+
+-----
+### 데이터 입출력과 Scanner 클래스
+-----
+1. 데이터 입출력
+  - System.out : Console → Monitor로 데이터 출력 (System Class의 out Field)
+    + PrintStream 타입의 필드로, print(), println(), printf() 메소드 이용
+  - System.in : Keyboard → 데이터 입력 (System Class의 in Field)
+    + 보조 스트림을 연결하는 작업 필요
+
+2. Scanner Class
+  - 문자 파일이나 바이트 기반 입력 스트림에서 라인 단위 문자열 쉽게 읽도록 java.util 패키지에서 제공하는 클래스
+    + import 선언 : 다른 패키지를 가져오는데 사용 → import java.패키지명.클래스명; (java.lang package 제외 → java.lang은 import 선언하지 않아도 됨)
+       → import 선언문 미사용으로도 가능 : java.util.Scanner
+      
+  - 입출력 스트림, 보조 스트림이 아님
+
+```java
+Scanner scanner = new Scanner(System.in);
+Scanner 변수 선언 = 바이트 기반 입력스트림(System.in)으로부터 Scanner 생성 후, 생성된 Scanner를 변수에 저장
+ 
+String inputData = scanner.nextLine();
+String 변수 선언 = Enter이전까지 입력된 행단위 문자열 읽은 후, 읽은 문자열을 String 변수에 저장
+```
+  - nextLine() : (개행전까지) 한 줄의 문자열을 입력받아 문자열을 반환
+  - nextInt(Byte,Short,Long)/Float(Double)/Boolean() : (개행전까지) 정수/실수/논리값을 입력받아 int형으로 반환
+  - close() : Scanner 클래스의 객체 scanner 할당 해제 (해제하지 않는다면, 객체에서 계속적으로 메모리에 할당)   
+    + Java는 기본적으로 사용하지 않는 변수에 대해 Garbage Collector에 의해 자동적으로 수거해 메모리 해제
+
+```java
+import java.util.Scanner; // Scanner Class의 Package : java.util의 Scanner Class Import
+
+/* 
+ * 참조 변수 (Reference Type) : 주소를 저장하는 변수
+ * Primitive Type : 데이터타입 변수명;
+ * Reference Type -  Class Object
+ *    - Class로부터 Object를 생성해 참조 변수에 주소 할당
+ *    - 클래스타입 클래스명 = new 클래스타입();
+ *    - new Keyword를 통해 객체 생성
+ *    ex) String name;
+ *        name = new String("");
+ *      = String name = new String(""); // String Class는 new Keyword 생략 가능
+ *        -> 클래스타입 클래스명 = new 클래스타입();
+ */
+/*
+ * Scanner Class
+ *  - java.util package -> Scanner Class
+ *  - 사용자로부터 특정 데이터를 입력받기 위한 용도로 사용되는 Class
+ */
+public class Ex1_Scanner_p636 {
+	public static void main(String[] args) {
+		/*
+		 * Scanner Class로부터 Object 생성해 참조변수에 할당
+		 * 매개변수 : 바이트기반 스트림(System.in)
+		 */
+		Scanner scanner = new Scanner(System.in); // 참조변수 scanner에는 Scanner 객체의 주소 저장
+		System.out.print("Name : ");
+		String name = scanner.nextLine(); // (개행전까지) 한 줄의 문자열을 입력받아 문자열로 반환
+		System.out.println("Name : " + name);
+
+		System.out.print("Age : ");
+		int age = scanner.nextInt(); // (개행전까지) 정수값 입력받아 정수형으로 반환
+		System.out.println("Age : " + age);
+		
+		System.out.print("Height(소수점 포함) : ");
+		double height = scanner.nextDouble(); // (개행전까지) 실수값 입력받아 실수형으로 반환
+		System.out.println("Height : " + height);
+		
+		System.out.print("Is Woman? (true = Woman | false = Man) : ");
+		boolean isWoman = scanner.nextBoolean(); // (개행전까지) 논리값 입력받아 boolean형으로 반환
+		System.out.println("Is Woman? : " + isWoman);
+		
+		scanner.close(); // Scanner Object scanner 객체 할당 해제 (미해제 시, 게속적으로 메모리에 할당)
+	}
+}
+```
