@@ -755,4 +755,519 @@ public class Car02_Main {
 	}
 }
 ```
+-----
+## 메서드 (method)
+-----
+1. 객체의 동작(기능)이며, 호출해서 실행할 수 있는 중괄호 { } 블록 존재
+2. 메소드를 호출하면, 중괄호 { } 블록에 있는 모든 코드들이 일괄 실행
+3. return 문
+   	- 메소드의 실행을 중지하고 리턴값을 지정하는 역할
+	- 리턴값이 있는 메서드 : 반드시 리턴(return)문을 사용해 리턴값을 지정해야함
+	- return 문 뒤에 실행문이 올 수 없음
+	- return 값이 없는 메서드 : 메소드 실행을 강제 종료하는 역할
 
+< Car03 Class >
+```java
+/*
+ * Method와 return문
+ *  - Method 
+ *    * 객체의 동작(기능), 호출해서 실행할 수 있는 중괄호 { } 블록 존재
+ *    * 메소드를 호출하면, 중괄호 { } 블록에 있는 모든 코드들이 일괄 실행
+ */
+
+public class Car03 {
+	/*
+	 * Field 
+	 *  - Date(즉 속성)
+	 *  - [Access Modifier] [Modifier] Type Field_Name [= initial Value];
+	 */
+	String brand; // 브랜드
+	int price; // 가격
+	int current_speed; // 현재 속도
+	int max_speed = 300; // 최고 속도
+	
+	/*
+	 * Constructor 
+	 *  - 생성자이며, 필드의 초기화 역할을 주로 담당
+	 *  - [Access Modifier] Class_Name(Argument List) { 
+	 *           Statement; 
+	 *    }
+	 */
+	Car03() {
+		this(null, 0, 0);
+	}
+	
+	Car03(String brand) {
+		this(brand, 0, 0);
+	}
+	
+	Car03(String brand, int price) {
+		this(brand, price, 0);
+	}
+	
+	Car03(String brand, int price, int speed) {
+		this.brand = brand;
+		this.price = price;
+		this.current_speed = speed;
+	}
+	
+	/*
+	 * Method 
+	 *  - 동작(기능) 
+	 *  - [Access Modifier] [Modifier] Return_Type Method_name(Argument List) {
+	 *       statement; 
+	 *       return ~; 
+	 *   }  
+	 */
+	
+	/*
+	 * method 1 : argument x, return x
+	 *   void Method_name() {
+	 *   	statement;
+	 *   }
+	 *   
+	 * method 2 : argument x, return o
+	 *   ReturnType Method_name() {
+	 *   	statement;
+	 *   	return returnValue;
+	 *   }
+	 *   
+	 * method 3 : argument o, return x
+	 *	 void Method_name(argument list) {
+	 *		Statement;
+	 *	 }
+	 *
+	 * method 4 : argument o, return o
+	 * 	 ReturnType Method_name(argument list) {
+	 * 		Statement;
+	 * 		return returnValue;
+	 *   }
+	 *   
+	 */
+	
+	/*
+	 * Method 1 : argument x, return x
+	 */
+	void powerOn() {
+		/*
+		 * 시동을 키는 메서드
+		 */
+		System.out.println("powerOn() : 시동이 켜짐");
+	}
+	
+	void powerOff() {
+		/*
+		 * 시동을 끄는 메서드
+		 */
+		System.out.println("powerOff() : 시동이 꺼짐");
+	}
+	
+	void showCurrent_Speed() {
+		/* 
+		 * 현재 속도 출력
+		 */
+		System.out.println("현재 속도는 " + this.current_speed + " 입니다.");
+	}
+
+	/*
+	 * Method 2 : argument x, return o
+	 */
+
+	int speedUp() {
+		/*
+		 * 현재 속도를 올려 그 값을 반환하는 메서드
+		 */
+		++current_speed; // 속도 증가
+		
+		if(current_speed >= max_speed) { // 현재 속도가 최고 속도을 넘어서려고 하면,
+			current_speed = max_speed; // 현재 속도는 최고 속도로 유지
+		}
+		return current_speed;
+	}
+	
+	int speedDown() {
+		/*
+		 * 현재 속도를 내려 그 값을 반환하는 메서드
+		 */
+		--current_speed; // 속도 감소 (this 생략 : 명시를 하지 않아도 현재 인스턴스의 변수임을 알 수 있음)
+		
+		if(current_speed <= 0) { // 현재 속도가 최저 속도인 0에 도달하면,
+			current_speed = 0; // 현재 속도는 최저 속도인 0에 유지
+		}
+
+		return current_speed;
+	}
+	
+	int speedDown_print() { 
+		/*
+		 * 현재 속도를 내려 그 값을 출력하고, 반환하는 메서드
+		 */
+		--current_speed; // 속도 감소 (this 생략 : 명시를 하지 않아도 현재 인스턴스의 변수임을 알 수 있음)
+		
+		if(current_speed <= 0) { // 현재 속도가 최저 속도인 0에 도달하면,
+			current_speed = 0; // 현재 속도는 최저 속도인 0에 유지
+		}
+		
+		showCurrent_Speed(); // 현재 속도를 출력 (메서드가 또 다른 메서드 호출 - 메서드를 내부에서 호출)
+		// = System.out.println("현재 속도는 " + current_speed + " 입니다.");
+		return current_speed; // 메서드를 종료(이후에 실행문을 추가할 수 없음)
+	}
+	
+	/*
+	 * method 3 : argument o, return x
+	 */
+	void convert_direction(String direction) { // 문자열을 매개변수로 받아 방향 전환하는 메서드
+		System.out.println("convert_direction() : " + direction + " 방향으로 전환 합니다.");
+	}
+	
+	void convert_direction(char direction) { // Method Overloading : 문자로 매개변수를 받아 방향 전한하는 메서드
+		System.out.println("convert_direction() : " + direction + "쪽 방향으로 전환 합니다.");
+	}
+	
+	void convert_direction(int num) { // Method Overloading : 숫자를 받아 방향 전한하는 메서드
+		/*
+		 * 숫자를 매개변수로 받아 방향을 전환하는 메서드
+		 *  (1 : 동쪽, 2 : 서쪽, 3 : 남쪽, 4 : 북쪽)
+		 */
+		
+		String result = null;
+		switch(num) { // 매개변수 num 값에 따라 이동
+			case 1 : 
+				result = "동"; // 1은 동
+				break;
+			case 2 : 
+				result = "서"; // 2는 서
+				break;
+			case 3 : 
+				result = "남"; // 3은 남
+				break;
+			case 4 : 
+				result = "북"; // 4는 북
+				break;
+			default : // 이 외의 값 입력 시 가던 방향으로 전환
+				result = "가던 방향";
+				break;
+		}
+		System.out.println("convert_direction() : " + result + "쪽 방향으로 전환 합니다.");
+	}
+	
+	/*
+	 * method 4 : argument o, return o
+	 */
+	String convert_direction2(int num) { 
+		/*
+		 * 숫자를 매개변수로 받아 방향을 전환하는 메서드
+		 *  (1 : 동쪽, 2 : 서쪽, 3 : 남쪽, 4 : 북쪽)
+		 */
+		
+		String result = "";
+		switch(num) { // 매개변수 num 값에 따라 이동
+			case 1 : 
+				result = "동"; // 1은 동
+				break;
+			case 2 : 
+				result = "서"; // 2는 서
+				break;
+			case 3 : 
+				result = "남"; // 3은 남
+				break;
+			case 4 : 
+				result = "북"; // 4는 북
+				break;
+			default : // 이 외의 값 입력 시 가던 방향으로 전환
+				result = "가던 방향";
+				break;
+		}
+		return result;
+	}
+}
+```
+
+< Main Class >
+```java
+/*
+ * Car03 Main Class
+ */
+public class Car03_Main {
+	public static void main(String[] args) {
+		/*
+		 * Car03 객체 생성
+		 */
+		
+		Car03 car = new Car03();
+		
+		// 메서드를 외부에서 호출
+		car.powerOn(); // 시동을 검
+		
+		car.showCurrent_Speed(); // 현재 속도를 출력
+		
+		car.speedUp(); // 현재 속도를 올림
+		car.showCurrent_Speed(); // 현재 속도를 출력
+		
+		int current_speed = car.speedUp(); // 현재 속도를 올리고, 그 값을 int 변수에 저장
+
+		
+		car.speedUp(); // 현재 속도를 올림
+		car.showCurrent_Speed(); // 현재 속도를 출력
+		
+		current_speed = car.speedDown_print(); // 현재 속도를 내리고, 현재 속도를 출력
+		
+		current_speed = car.speedDown(); // 현재 속도를 내림
+		System.out.println("현재 속도는 " + current_speed + " 입니다.");
+		
+		car.speedDown(); // 현재 속도를 내림
+		car.showCurrent_Speed(); // 현재 속도를 출력
+		
+		car.convert_direction("북쪽"); // 북쪽으로 방향 전환
+		car.convert_direction('남'); // 남쪽으로 방향 전환
+		car.convert_direction(2); // 2는 서쪽 방향이므로 서쪽 방향으로 전환
+
+		System.out.println("convert_direction2() : " + car.convert_direction2(4) + "쪽 방향으로 전환 합니다.");
+		// 4는 북쪽 방향이므로 북쪽 방향으로 전환
+		
+		car.powerOff(); // 시동을 끔
+	}
+}
+```
+
+-----
+### 가변 인자
+-----
+1. 배열을 이용 (method_name(DataType[] value_name)
+	- 매개변수가 없다면, 컴파일 에러가 발생
+	- 매개변수가 아직 생성되지 않았다면, null을 입력 → NullPoninterException 발생
+
+2. 가변인자 활용 (method_name(DataType... value_name)
+	- 매개변수가 없어도 가능 → 자동으로 기본값 하나 처리
+
+3. 가변 인자
+	- 매개변수의 개수를 모를 경우, 가변 인자를 활용
+	- 가변 인자를 매개변수 중에서 가장 마지막으로 선언
+	- 가변인자는 내부적으로 배열을 이용 → 가변 인자가 선언된 메서드를 호출할 때마다 배열이 새로 생성 → 반복문 활용시 for문, 향상된 for문을 이용하면 요소별 산출 가능
+	- 인자의 개수를 값으로 설정하면, 인자가 없거나 개수는 제한이 없으며, 배열도 가능
+	- 가변인자의 매개변수의 타입을 배열로 하면 반드시 인자를 지정해야하며, 인자 생략 불가 (null 또는 0인 배열로 인자 지정)
+
+ 4. 타입... 변수명 형식으로 선언
+
+    	예) static String concatenate(String delim, String... args) { // 문자열 배열 및 여러개의 문자열 가능
+                          /* 구현 내용 */
+            }
+
+    < Class>
+```java
+    /*
+ * 매개변수의 개수를 모를 경우
+ *  1) 배열을 이용 => method_name(DataType[] Value_name)
+ *  2) 가변인자 활용 => method_name(DataType... Value_name)
+ */
+
+public class Computer01_p253 {
+	/*
+	 *  1) 배열을 이용 => method_name(DataType[] Value_name)
+	 */
+	
+	int sum1(int[] values) { // 배열 이용
+		int result = 0;
+		
+		for(int i = 0; i < values.length; i++) {
+			result += values[i];
+		}
+		
+		return result;
+	}
+	
+	/*
+	 *  2) 가변인자 활용 => method_name(DataType ... Value_name)
+	 */
+	
+	int sum2(int... values) { // 가변 인자 활용 (배열도 참조 가능)
+		int result = 0;
+		
+		for(int value : values) {
+			result += value;
+		}
+		
+		return result;
+	}
+}
+```
+
+< Main >
+```java
+/*
+ * Computer Main Class
+ */
+public class Computer01_Main {
+	public static void main(String[] args) {
+		Computer01_p253 computer = new Computer01_p253();
+		
+		int[] values = new int[]{1, 2, 3, 4, 5};
+		int result = computer.sum1(values); // 배열로 매개변수로 받아 계산
+		// = int result = computer.sum1(new int[]{1, 2, 3, 4, 5});
+		System.out.println("Values sum = " + result);
+		// result = computer.sum1(); // argument 미일치
+		result = computer.sum1(null); // 배열로 매개변수로 받아 계산
+		System.out.println("Values sum = " + result);
+		
+		System.out.println("-------------------");
+		result = computer.sum2(); // 가변인자로 받아 계산
+		System.out.println("Values sum = " + result);
+		
+		result = computer.sum2(1, 2, 3, 4 ,5); // 가변인자로 받아 계산
+		System.out.println("Values sum = " + result);
+		
+		result = computer.sum2(values); // 가변인사는 배열도 가능하므로 배열로 받아 계산
+		System.out.println("Values sum = " + result);
+	}
+}
+```
+
+-----
+### 인스턴스(Instance) 멤버
+-----
+1. 객체(인스턴스)마다 가지고 있는 필드와 메서드 (인스턴스 필드, 인스턴스 메서드)
+2. 객체에 소속된 멤버이기 때문에 객체 없이 사용 불가 (객체 생성이 항상 필요)
+3. 객체 수준에서 정의되며, 특정 인스턴스와 연결
+4. 객체가 생성될 때 메모리에 할당, 인스턴스 생성과 함께 초기화.
+5. 각 인스턴스는 자체적인 인스턴스 멤버를 가지며, 인스턴스 간에 공유되지 않음
+	- 인스턴스 변수 : 주로 생성자를 통해 초기화
+	- 인스턴스 메서드 : 특정 인스턴스를 통해 호출되며, 해당 인스턴스에 대한 작업을 수행
+
+<실행 순서>
+1. 인스턴스 변수가 메모리에 할당되고, 생성자를 통해 초기화
+2. 생성자는 new 키워드를 사용하여 객체를 생성할 때 호출되며, 추가적인 초기화 작업을 수행
+
+   		= 클래스타입 참조변수명 = new 생성자명();
+   
+-----
+### 정적(Static) 멤버
+-----
+1. 클래스에 고정된 필드와 메서드 (정적 필드 / 메서드)
+2. 클래스에 소속된 멤버로 객체 내부에 존재하지 않고, 메서드 영역에 존재
+3. 객체를 생성하지 않고, 클래스로 바로 접근해 사용
+
+4. static 키워드 : 클래스 수준의 멤버로 선언.사용
+
+	   1. 클래스명의 모든 인스턴스들이 공유하는 멤버
+               = 클래스명.필드 / 클래스명.필드=값, 클래스명.메서드명()
+   
+	   2. 클래스가 로딩될 때 메모리에 할당되며, 인스턴스 생성과는 독립적으로 동작
+
+<div align = "center">
+<img width="403" alt="제목 없음" src="https://github.com/sooyounghan/JAVA/assets/34672301/1fbea8a8-ea88-4227-a8ad-d65e8a8e977b">
+</div>
+
+-----
+### 인스턴스(Instance) 멤버와 정적(Static) 멤버
+-----
+1. 필드
+
+   	   객체마다 가지고 있어야 할 데이터 : 인스턴스 필드
+	   공용적인 데이터 : 정적 필드
+
+2. 메서드
+
+	   인스턴스 필드로 작업해야 할 메서드 : 인스턴스 메서드
+	   인스턴스 필드로 작업하지 않는 메서드 : 정적 메서드
+
+-----
+### 초기화 블록
+-----
+1. 정적 초기화 블록 : 클래스가 메서드 영역으로 로딩될 때 자동으로 실행되는 블록
+
+		 static { ... }
+2. 정적 필드의 복잡한 초기화 작업과 정적 메서드 호출 가능
+3. 클래스 내부에 여러 개 선언되면 선언된 순서대로 실행
+4. 정적 메서드와 정적 블록 작성 시 주의점
+
+	- 객체가 없어도 실행 가능
+	- 블록 내부 인스턴스 필드나 인스턴스 메서드 사용 불가
+	- 객체 자신 참조인 this 사용 불가
+
+```java
+public class StaticEx_p273 {
+/*
+ * Field : [Access Modifier][Modifier] DataType Field_name [= value];
+ * 
+ * Constructor : [Access Modifier] Class_name (argument list) { statement; }
+ * 
+ * Method : [Access Modifier][Modifier] Method_name(argument list) { statement; return~; }
+ */
+	int v = 100; // Instance Variable
+	static int v2 = 100; // Static(정적, 클래스) Variable (클래스가 메서드 영역에 적재되는 시점에 로딩)
+	
+	StaticEx_p273() { // Constructor
+		System.out.println("Constrcutor Call."); // 객체 생성 시 생성자를 통해 객체 초기화 작업 실시
+	}
+	
+	void method1() { // Instance Method
+		System.out.println("Instance Method1() call");
+	}
+	
+	static void method2() { // Static(정적, 클래스) Method (클래스가 메서드 영역에 적재되는 시점에 로딩)
+		System.out.println("Static Method2() call");
+	}
+	
+	public static void main(String[] args) { // 클래스가 로딩될 때 메모리에 할당 : static method(정적 메서드)
+		/*
+		 * StaticEx_p273 클래스의 객체를 생성해 field에 접근하고, 또 다른 메서드 호출
+		 */
+		
+		StaticEx_p273 ex = new StaticEx_p273();
+		System.out.println(ex); // 이 클래스의 객체의 주소가 패키지.클래스명@16진수의 HashCode 형태로 출력
+		System.out.println();
+		
+		System.out.println("ex.v = " + ex.v); // 인스턴스 ex의 변수 v에 접근 (인스턴스 필드)
+		ex.method1(); // 인스턴스 ex의 메서드 method1()에 접근 (인스턴스 메서드)
+		
+		System.out.println();
+		
+		/*
+		 * static 필드와 메서드는 클래스가 로딩될 때, 메서드 영역에 적재
+		 * - Main method()는 static 메서드
+		 * - static 멤버는 로딩되면, 클래스 파일이 메서드 영역에 적재되지만, 이 시점에서는 인스턴스가 존재하지 않을 수 있음
+		 *   (즉, 인스턴스(=객체)는 객체 생성 시에 객체가 생성되므로 항상 존재하지 않음)
+		 *   
+		 *   1. 객체 생성 후 인스턴스 필드와 메서드에 접근
+		 *   2. 클래스가 메서드 영역에 적재될 시점에 똑같이 적재 (인스턴스 필드 / 메서드에 static 키워드)
+		 *      - 같은 클래스 내 : 필드명과 메서드명으로 접근 가능
+		 *      - 다른 클래스 : 클래스명.필드 / 클래스명.메서드명()으로 호출
+		 */
+
+		// System.out.println(v); // error : 변수 v는 인스턴스 변수
+		// method1(); // error : method1()는 인스턴스 메서드
+
+		System.out.println("static v2 = " + v2); // v2는 static field
+		method2(); // method2()는 static method
+		System.out.println();
+		// Line 54~55와 Line 57~58 동일 결과
+		System.out.println("static v2 = " + StaticEx_p273.v2); // v2는 static field
+		StaticEx_p273.method2(); // method2()는 static method
+	}
+}
+```
+
+-----
+### 패키지 (Package)
+-----
+1. 클래스를 기능별로 묶어서 그룹 이름을 붙여놓은 것 (파일들을 관리하기 위한 폴더(디렉토리)와 비슷한 개념)
+2. 클래스 이름의 일부 (클래스를 유일하게 만들하게 만들어주는 식별자)
+3. 전체 클래스 이름 = 상위패키지.하위패키지.클래스
+4. 클래스명이 같아도 패키지명이 다르면 다른 클래스로 취급
+5. 클래스를 선언할 때 포함될 패키지 선언
+	- 클래스 파일(*.class) 선언된 패키지와 동일한 폴더 안에서만 동작 [다른 폴더 안에 넣으면 동작하지 않음]
+
+<div align = "center">
+<img width="153" alt="다운로드" src="https://github.com/sooyounghan/JAVA/assets/34672301/5e9ba096-893d-4bed-89d3-36744a14e8a7">
+</div>
+
+-----
+### import문
+-----
+1. 패키지 내 같이 포함된 클래스 간 클래스 이름으로 사용 가능
+2. 패키지가 다른 클래스를 사용해야 할 경우
+	- 패키지명 포함된 전체 클래스 이름 사용
+	- import문으로 패키지를 지정하고 사용
+3. java.lang package는 기본적으로 내장되어 import 되어있음, 그 외 패키지는 import
+4. 패키지 내 모든 클래스 사용 : import 상위패키지.하위패키지.*;
+	- import java.util.*는 util 패키지 내 모든 클래스를 import를 하는 것이지 다른 util package까지 import 하는 것이 아님
