@@ -691,3 +691,247 @@ public class Iterator_Ex {
 	}
 }
 ```
+-----
+### Map Collection
+-----
+1. 키(Key)와 값(Value)으로 구성된 Map.Entry 객체를 저장하는 구조
+2. 키와 값은 모두 객체
+3. 키는 중복될 수 없지만, 값은 중복 가능
+
+<div align = "center">
+<img width="341" alt="다운로드 (7)" src="https://github.com/sooyounghan/JAVA/assets/34672301/3be923f5-6a48-40c6-a6c4-a080f851a07c">
+</div>
+
+	Value는 중복을 허용하므로, 다른 키에 대해서 동일한 value면 그 해시코드 값은 같음 (즉, 같은 객체를 가리킴)
+
+4. 구현 클래스 : HashMap, TreeMap, HashTable, Properties  
+5. 주요 메서드
+<div align = "center">
+<img width="459" alt="다운로드 (8)" src="https://github.com/sooyounghan/JAVA/assets/34672301/cf18f37f-8108-493d-997d-4f7ea02a0396">
+</div>
+
+-----
+### HashMap
+-----
+<div align = "center">
+<img width="414" alt="다운로드 (9)" src="https://github.com/sooyounghan/JAVA/assets/34672301/e0ee6348-24f2-459f-818e-972bbf0c25ff">
+</div>
+
+1. 키 객체는 hashCode()와 equals()를 재정의해 동등 객체가 될 조건을 정해야함
+2. 해싱을 구현한 HashMap, HashSet, Properties, HashTable과 같이 해싱
+   기법으로 구현한 컬렉션 클래스에서는 Object클래스에서 정의된 hashCode()를
+   해시함수로 사용
+3. Object클래스에 정의된 hashCode()는 객체의 주소를 이용하는 알고리즘으로
+   해시코드를 만들기 때문에, 모든 객체에 대해 호출한 결과로 이용
+
+   	   * String Class의 Object로부터 상속받은 hashCode()는 오버라이딩해서
+             문자열의 내용으로 해시코드 반환
+
+5. 따라서, 서로 다른 String인스턴스일지라도 같은 내용의 문자열을 가졌다면 같은 해시코드를 내놓음
+
+6. 서로 다른 객체에 대해 equals()로 비교한 결과가 true인 동시에, hashCode()의 반환값이 같아야
+   같은 객체로 인식
+
+        * 그러므로 새로운 클래스를 정의할 때, equals()을 해야한다면, hashCode()도
+   	   오버라이딩해야 equals()도 같이 재정의해서 equals()의 결과가 true인 동시에 두 객체의
+           hashCode()의 결과가 동일하도록 해줘야함
+
+ 8. 컬렉션 클래스에서는 equals()의 호출 결과가 true이지만 해시코드가 다른 두 객체를 서로 다른
+    것으로 인식하고 따로 저장
+    
+<div align = "center">
+<img width="376" alt="다운로드 (10)" src="https://github.com/sooyounghan/JAVA/assets/34672301/9aa4b024-40ac-468d-a589-1c6a8fc2764d">
+</div>
+
+9. 키 타입은 String을 많이 사용
+
+       (String은 문자열이 같을 경우 동등 객체가 될 수 있도록 hashCode()와 equals() 메서드가
+        재정의 되어있음)
+
+10. 동일한 키 값에 대해 다른 값을 입력하면, 기존 값은 삭제되고, 현재 값으로 갱신
+11. 주요 메서드
+<div align = "center">
+<img width="377" alt="다운로드 (11)" src="https://github.com/sooyounghan/JAVA/assets/34672301/76b9be0c-2374-4ed7-9960-f5b882df4d21">
+</div>
+
+```java
+import java.util.*; // Map Interface Import
+
+public class Map_Ex {
+	public static void main(String[] args) {
+		Map<Object, Object> hashMap = new HashMap<Object, Object>(); // Generics 사용 (Key, Value : Object)
+		//Map treeMap = new TreeMap();
+		//Map prop = new Properties();
+		System.out.println("hashMap = " + hashMap);
+		
+		/*
+		 * 저장된 키와 값의 쌍의 수 확인
+		 */
+		System.out.println("hashMap size = " + hashMap.size()); // 0
+		
+		/*
+		 * K, V 추가 : Object put(Object key, Object Value)
+		 */
+		hashMap.put(1, 100); // 객체이므로 Auto-boxing
+		hashMap.put(2.0, 100); // Key 1과 2.0에 동일한 value 100 입력(중복) 
+		hashMap.put(true, "AB");
+		hashMap.put('A', 'Z');
+		System.out.println("Key 'A' = " + hashMap.get('A'));
+		hashMap.put('A', "C"); // 동일한 키 값에 대해 다른 값을 입력했으므로, 기존 값은 삭제되고, 현재 값으로 갱신
+		System.out.println("Key 'A' = " + hashMap.get('A'));
+		
+		/*
+		 * K를 이용해 V를 가져오기 : Object get(Object key)
+		 */
+		System.out.println("Key 1 = " + hashMap.get(1));
+		System.out.println("Key 1's Value Hashcode = " + hashMap.get(1).hashCode()); 
+		
+		System.out.println("Key 2.0 = " + hashMap.get(2.0));
+		System.out.println("Key 2.0's Value Hashcode = " + hashMap.get(2.0).hashCode()); // Value는 중복을 허용하므로, 다른 키에 대해서 동일한 value면 그 해시코드 값은 같음
+		
+		System.out.println("hashMap size = " + hashMap.size()); // 4
+
+		/*
+		 * 키를 통해 값 제거 : Object remove(Object key, [Object value]);
+		 *  - 키 또는 요소를 포함하고 있는지 확인
+		 *    1. boolean containsKey(Object key) : HashMap에 지정된 키(Key)를 포함하고 있는지 확인 (있으면 true, 없으면 false)
+		 *    2. boolean containsValue(Object value) : HashMap에 지정된 요소(value)를 포함하고 있는지 확인 (있으면 true, 없으면 false)
+		 */
+		if(hashMap.containsKey(2.0)) { // 키 2.0을 가지고 있다면,
+			System.out.println("HashMap Key 2.0's value remove = " + hashMap.remove(2.0)); // 키 2.0의 요소 삭제
+		}
+		else {
+			System.out.println("Not Key 2.0");
+		}
+		
+		System.out.println(hashMap.remove('A')); // 문자 A키를 가지고 있으면, 그 맞는 값을 제거
+		System.out.println(hashMap.remove('C')); // C는 현재 키에 존재하지 않으므로, null 반환
+		
+		System.out.println("hashMap size = " + hashMap.size()); //  2
+		
+		/*
+		 * Set keySet() : HashMap에 저장된 모든 키가 저장된 set 반환
+		 */
+		Set<Object> keySet = hashMap.keySet(); // Generics에 의해 Object
+		Iterator<Object> it = keySet.iterator(); // Generics에 의해 Object
+		
+		System.out.print("Hash Map [ Key : Value ] = [ ");
+		while(it.hasNext()) {
+			Object key = it.next();
+			System.out.print(key + " : ");
+			System.out.print(hashMap.get(key) + " ");
+		}
+		System.out.println("]");
+		
+		hashMap.clear();
+		if(hashMap.isEmpty()) {
+			System.out.println("hashMap size = " + hashMap.size()); // 0
+		}
+	}
+}
+```
+
+-----
+### KeySet, EntySet
+-----
+1. Set keySet() : HashMap에 저장된 모든 키가 저장된 set 반환 ← Iterator 활용
+```java
+		Set<Object> keySet = hashMap.keySet(); // Generics에 의해 Object
+		Iterator<Object> it = keySet.iterator(); // Generics에 의해 Object
+		
+		System.out.print("Hash Map [ Key : Value ] = [ ");
+		while(it.hasNext()) {
+			Object key = it.next();
+			System.out.print(key + " : ");
+			System.out.print(hashMap.get(key) + " ");
+		}
+		System.out.println("]");
+```
+
+2. Set entrySet() : HashMap에 저장된 키와 값을 Entry 형식(키와 값의 쌍)의 형태의 Set으로 가져옴
+
+	- entrySet()의 반환타입 : Map.Entry<K, V>의 형태
+	- 따라서 Set은 Set<Map.Entry<K, V>> 형태가 되어야함
+	- 반복자는 단순히 그 요소를 받아올 것이므로, Iterator 또한 <Entry<K, V>>
+	- 반복자에 의해 받게 된다면, 그 역시 타입은 Map.Entry<K, V>
+	- Map.Entry<K, V> 에서 키에 접근 : K getKey() / 요소에 접근 : V getValue()
+
+```java
+		// enteySet() -> Map.Entry 형태이므로 Entry 형태의 Set으로 전환되므로 Set의 Generics는 <Entry<Object, Object>
+        Set<Entry<Object, Object>> entrySet = hashMap.entrySet(); // Map -> Entry
+        
+        // Set -> Iterator를 전환 -> 반복자이므로 어차피 형태는 동일 (Entry<Object, Object>)
+		Iterator<Entry<Object, Object>> entry_iter = entrySet.iterator(); // Entry -> (Key, Value)
+		
+		System.out.print("Entry Set = [ ");
+		while(entry_iter.hasNext()) {
+            // 요소의 값은 Map.Entry<Object, Object> 형태
+			Map.Entry<Object, Object> entry = entry_iter.next();
+            
+            // Map.Entry 키에 접근 : Object getKey()
+            // Map.Entry 요소에 접근 : Object getValue()
+			System.out.print("Key : " + entry.getKey() + " / " + "value : " + entry.getValue() + ", ");
+		}
+		System.out.println(" ]");
+```
+
+-----
+### HashTable
+-----
+```java
+import java.util.*;
+
+/*
+ * HashTable - Map Collection
+ */
+public class HashTable_Ex {
+	public static void main(String[] args) {
+		Hashtable<String, String> hashtable = new Hashtable<>();
+		
+		/*
+		 * HashTable에 값 입력
+		 */
+		hashtable.put("001", "abc");
+		hashtable.put("002", "bcd");
+		hashtable.put("003", "cde");
+		hashtable.put("004", "efg");
+		hashtable.put("005", "hij");;
+		hashtable.put("001", "jkm");;
+	
+		/*
+		 * Stream을 이용한 출력
+		 */
+		hashtable.entrySet().stream().forEach((e) -> System.out.println(e.getKey() + " : " +e.getValue())); // Stream을 이용한 Console 출력
+		System.out.println();
+		
+		/*
+		 * KeySet을 이용한 Iterator로 요소 추출
+		 */
+		Set<String> keySet = hashtable.keySet(); // keySet 이용
+		Iterator<String> iter = keySet.iterator();
+		
+		while(iter.hasNext()) {
+			String key = iter.next();
+			System.out.println(key + " : " + hashtable.get(key)); // KeySet을 이용한 key, value 출력
+		}
+		System.out.println();
+		
+		/*
+		 * Collection을 이용한 hashtable의 요소 추출
+		 */
+		Collection<String> c = hashtable.values(); // values() 이용
+		System.out.println(c); // value 출력
+		System.out.println();
+		
+		/*
+		 * entrySet을 이용한 key, value 값 추출
+		 */
+		Set<Map.Entry<String, String>> entrySet = hashtable.entrySet();
+		Iterator<Map.Entry<String, String>> it = entrySet.iterator();
+		while(it.hasNext()) {
+			Map.Entry<String, String> e = (Map.Entry<String, String>)it.next();
+			System.out.println(e.getKey() + " : " + e.getValue()); // 키와 값 출력
+		}
+	}
+}
+```
