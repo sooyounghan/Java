@@ -935,3 +935,25 @@ public class HashTable_Ex {
 	}
 }
 ```
+
+-----
+### Generics
+-----
+1. 컴파일 단계에서 잘못된 타입을 사용할 수 있는 문제를 제거할 수 있도록 도와주는 기능
+2. 컬렉션, 람다식(함수적 인터페이스), 스트림 등에서 널리 사용
+3. 타입을 파라미터로 가지는 클래스와 인터페이스
+4. 선언 시 클래스 또는 인터페이스 이름 뒤에 <> 부호를 붙임 (<> 사이에는 타입 파라미터 위치)
+
+	   * 타입 파라미터 : 일반적으로 대문자 알파벳 한 문자로 표현
+
+5. 타입을 사용하지 않은 경우 : 자동적으로 Object 타입 사용 (빈번한 타입 변환 발생 → 프로그램 성능 저하)
+<div align = "center">
+<img width="332" alt="제목 없음" src="https://github.com/sooyounghan/JAVA/assets/34672301/d89d022e-0fbe-4f2f-8545-5cd1ce4d0245">
+</div>
+
+6. 제네릭 타입은 두 개 이상의 타입 파라미터 사용 가능 (각 타입 파라미터는 콤마로 구분)
+	    * 자바 7 이후부터는 다음과 같이 가능
+<div align = "center">
+<img width="306" alt="제목 없음" src="https://github.com/sooyounghan/JAVA/assets/34672301/2494983c-9fef-41d6-aeec-ab82476938ae">
+</div>
+   
