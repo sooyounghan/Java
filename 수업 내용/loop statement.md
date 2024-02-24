@@ -168,9 +168,11 @@ public class WhileEx01_p153 {
 <div align = "center">
   <img width="402" alt="다운로드 (6)" src="https://github.com/sooyounghan/JAVA/assets/34672301/ea6db1c8-c772-4475-a365-c1f7fff3d745">
 </div>
-1. 조건에 따라 반복을 계속할 지 사용하는 것은 while문과 동일하나, 무조건적으로 처음 실행문을 최초 실행후,
+1. 조건에 따라 반복을 계속할 지 사용하는 것은 while문과 동일하나, 무조건적으로 처음 실행문을 최초 실행후,   
+
 2. 조건식에 따른 조건 확인 후 반복 → 무조건 중괄호 {} 블록을 한 번 실행한 후, 조건 검사
-3. do ~ while(); (세미콜론 주의)
+   
+4. do ~ while(); (세미콜론 주의)
 
 ```java
 /*
