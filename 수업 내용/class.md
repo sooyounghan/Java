@@ -1416,3 +1416,100 @@ public class Game_Main {
 	}
 }
 ```
+-----
+### final 키워드
+-----
+1. final 필드 : 수정 불가 필드 [Only Read]
+
+	   중요 : 수정 불가 필드의 범위는 이를 선언한 클래스이며, 상속하는 클래스까지 의미하는 것이 아님
+2.  final 클래스 : 부모로 사용 불가한 클래스 (상속 불가 클래스)
+	- 상속할 수 없는 final 클래스 : 자식 클래스를 만들지 못하도록 final 클래스로 생성
+	- public final class 클래스 { ... }
+
+3. final 메서드 : 자식이 재정의할 수 없는 메서드 (오버라이딩 불가능)
+	- 오버라이딩 불가한 final 메서드
+	- 자식 클래스가 재정의하지 못하도록 부모 클래스 메서드를 final로 생성
+```java
+/*
+ * final 키워드
+ *  - final 필드 : 수정 불가 필드 (Only Read)
+ *  - final 클래스 : 부모로 사용 불가한 클래스 (상속 불가 클래스)
+ *  - final 메서드 : 자식을 재정의할 수 없는 메서드 (오버라이딩 불가능)
+ */
+
+public class Final_p322 {
+
+}
+
+class Grandfather01 {
+	// Field
+	int money = 50;
+	final String job = "Doctor"; // Grandfather01의 필드 job을 final로 설정해 그 값이 수정 불가하도록 설정
+	
+	// Constructor
+	
+	// Method
+	void gfmethod() {
+		money = money + 5; // Ok. 메서드 호출과 동시에 money의 값은 55로 변경
+		// this.job = "Developer"; // Error. job 필드는 final로 지정되어 수정 불가
+		System.out.println("Grandfather01 method() money = " + money  + ", job = " + job);
+	}
+	
+	void drive() {
+		System.out.println("Grandfather01 drive() method");
+	}
+	
+	final void sing() { // final method
+		System.out.println("Grandfather01 sing() method");
+	}
+}
+
+final class Father01 extends Grandfather01 { // 더 이상 상속이 불가능
+	// Field
+	int money = 100; // Grandfather01 클래스로부터 상속받은 필드 재정의
+	String job = "Developer";
+	// Constructor
+	
+	// Method
+	@Override
+	void gfmethod() {
+		this.money = this.money + 5; // Ok. 메서드 호출과 동시에 money의 값은 55로 변경
+		System.out.println("Father01 method()  money = " + money  + ", job = " + job);
+	}
+	
+	/* @Override 
+	 * void sing() { // 자식 클래스인 Fathor01은 final 키워드로 인해 오버라이딩 불가
+	 *	System.out.println("Father01 sing() method");
+	 *}
+	 */
+}
+
+// final class Son01 extends Father01 { // Father01는 클래스 상속이 불가능하게 설정했으므로, 상속 불가
+	// Field
+	
+	// Constructor
+	
+
+	// Method
+// }
+```
+
+```java
+public class Final_Main {
+	public static void main(String[] args) {
+		Grandfather01 grandfather = new Grandfather01();
+		System.out.println("Grandfather01 Money = " + grandfather.money);
+		grandfather.gfmethod();
+		grandfather.drive();
+		grandfather.sing();
+		
+		System.out.println();
+		
+		Father01 father = new Father01();
+		System.out.println("Father01 Money = " + father.money);
+		father.gfmethod();
+		father.drive();
+		father.sing();
+	}
+}
+```
