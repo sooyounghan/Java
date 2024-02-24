@@ -489,3 +489,205 @@ public class ArrayLinkList {
 <img width="306" alt="0" src="https://github.com/sooyounghan/JAVA/assets/34672301/dedf395c-7f97-4ad9-a4af-4968186a3ff0">
 </div>
 
+-----
+### Set Collection
+-----
+1. 저장 순서가 유지되지 않으며, 중복이 불가능
+<div align = "center">
+<img width="343" alt="제목 없음" src="https://github.com/sooyounghan/JAVA/assets/34672301/ae4585a1-8798-4566-aeb8-7d47edbccaa5">
+</div>
+
+2. Hash Set Class
+	- Set 인터페이스를 구현한 대표적 컬렉션 클래스
+	- 순서를 유지하려면, LinkedHashSet 사용
+
+3. Tree Set Class
+	- 범위 검색과 정렬에 유리한 컬렉션 클래스
+	- HashSet보다 데이터 추가, 삭제에 대한 시간이 더 많이 걸림
+
+-----
+### Enumeration, Iterator, ListIterator
+-----
+1. Iterator [Collection Inteface - Set, List Interface]
+	- 컬렉션에 저장된 데이터를 접근하는데 사용되는 인터페이스
+```java
+public interface Iterator {
+  boolean hasNext();
+  Object next();
+  void remove();
+}
+```
+2. Iterator Interface
+	- Collection Interface 내 추상 메서드로 iterator()로 구현
+```java
+
+public interface Collection {
+   ...
+  public Iterator iterator();
+  ...
+}
+```
+3. Iterator Method
+	- boolean hasNext() : 다음 요소가 존재하면 true, 존재하지 않으면 false;
+	- Object next() : 현재 요소를 가져옴. 반환 타입 Object
+
+<div align = "center">
+<img width="345" alt="다운로드 (4)" src="https://github.com/sooyounghan/JAVA/assets/34672301/f109e67f-a4fe-491d-b901-e82f5c0e47db">
+</div>
+
+4. Set Collection (HashSet / TreeSet) 데이터 추출 - Iterator 
+	- Iterator 인터페이스 존재 / Collection Interface 내 iterator() 존재 : Collection 클래스에서 사용 가능
+	- iterator()를 사용 : 반환 타입으로 Iterator 객체 반환
+
+		  (인터페이스 참조타입 Iterator 으로 이를 구현되어 생성한 객체 Iterator 객체를 가리킴)
+		  이후, hasNext()를 통해 Set에 존재하는 요소 확인 후, 존재하면 받아오는 next() 또는 remove() 사용
+
+```java
+import java.util.*; // Set Package Import
+
+/*
+ * Hash Set
+ */
+public class Set_Ex {
+	public static void main(String[] args) {
+		/*
+		 * 정수 데이터 5개를 저장하는 HashSet
+		 */
+		Set hashSet = new HashSet(); // 다형성
+		// Set treeSet = new TreeSet(); // TreeSet 또한 Set 구현 클래스이므로 다형성을 구현하여 코드의 유연성 증가
+		System.out.println("HashSet = " + hashSet); // []
+		
+		/*
+		 * hashSet의 갯수 출력 : int size()
+		 */
+		System.out.println("HashSet size() = " + hashSet.size()); // 0
+		
+		/*
+		 * 데이터 추가 : boolean add(Object o)
+		 *   - 매개변수는 Object 객체이므로 모든 객체에 대해 수용 가능 (다양한 데이터 타입 가능)
+		 *   - Object o의 삽입이 되었으면 true, 되지 않았으면 false
+		 */
+		System.out.println("<HashSet add(Object e)>");
+		for(int i = 0; i < 5; i++) { // 5개의 원소 추가
+			hashSet.add((int)(Math.random() * 45) + 1);  // 1 ~ 45 까지의 난수 중 무작위 5개 삽입 (중복 제외)
+		}
+		System.out.println("HashSet Size() = " + hashSet.size()); // 5
+		System.out.println("HashSet = " + hashSet); // 1 ~ 5까지 무작위 난수 5개 저장(중복 제외) 
+		
+		/*
+		 * Set Collection (HashSet) 데이터 추출 - Iterator
+		 *   - Iterator 인터페이스 iterator() 메서드 존재 -> 이를 구현한 HashSet, TreeSet에 구현
+		 *   - iterator()를 사용하면 반환 타입으로 Iterator 객체 반환
+		 *   - 이후, hasNext()를 통해 Set에 존재하는 요소 확인 후, 존재하면 받아오는 next() 또는 remove() 사용
+		 */
+		
+		Iterator it = hashSet.iterator();
+		System.out.print("HashSet = [ ");
+		while(it.hasNext()) {
+			/*
+			 * boolean hasNext() : 다음 요소가 존재하면 true, 존재하지 않으면 false;
+			 * Object next() : 현재 요소를 가져옴. 반환 타입 Object
+			 */
+			Object obj = it.next();
+			System.out.print(obj + " ");
+		}
+		
+		System.out.println("]");
+		
+		/*
+		 * 데이터 삭제 (boolean remove(Object o)) : 매개변수 Object o 객체에 대해 있으면, 삭제 후 true / 아니면 false
+		 */
+		System.out.println("<HashSet remove(int index)>");
+		for(int i = 1; i <= 5; i++) {  // 1 ~ 45까지의 난수 중 무작위 수에 대해 삭제 (일치하는 수가 있다면)
+			System.out.print(i + " = " + (hashSet.remove((int)(Math.random() * 45) + 1) + " "));
+		}
+		System.out.println();
+		System.out.println("HashSet = " + hashSet); 
+		
+		/*
+		 * HashSet 데이터 모두 삭제, 즉 모두 완전히 비움 (void clear())
+		 * HashSet 내 비어있는지 확인 (boolean isEmpty()) : 비어있다면 true, 비어있지 않다면 false
+		 */
+		hashSet.clear();
+		System.out.println("HashSet = " + hashSet); 
+		System.out.println("HashSet Empty = " + hashSet.isEmpty());
+	}
+}
+```
+
+5. Enumeration : Iterator의 구버전
+<div align = "center">
+<img width="342" alt="다운로드 (5)" src="https://github.com/sooyounghan/JAVA/assets/34672301/c2553446-f5e2-48cf-bdd5-9f77b6798e53">
+</div>
+
+7. ListIterator : Iterator의 접근성을 향상 (단방향에서 양방향으로 변화) [List]
+<div align = "center">
+<img width="325" alt="다운로드 (6)" src="https://github.com/sooyounghan/JAVA/assets/34672301/17ab85fe-0caf-4ac1-8437-dd228639772c">
+</div>
+
+       * listIterator( ) : 인덱스를 부여하지 않고, listiterator 객체를 생성
+       * listIterator(int index) : 지정된 인덱스부터 listiterator 객체 생성
+
+```java
+import java.util.*;
+
+/*
+ * Iterator / ListIterator / Enumeration
+ *  - 컬렉션에 저장된 데이터를 접근하는데 사용되는 인터페이스
+ *  
+ *  1. Enumeration : boolean hasNextElement(), Object nextElement()
+ *  2. Iterator : boolean hasNext(), Object next() [List, Set]
+ *  3. ListIterator : boolean hasNext/Previous(), Object next/previous()... [List]
+ */
+public class Iterator_Ex {
+	public static void main(String[] args) {
+		List arr_list = new ArrayList(); 
+		
+		for(int i = 0; i < 5; i++) {
+			arr_list.add(i + " "); // 문자열 "1" ~ "5"까지 삽입
+		}
+		
+		/*
+		 * ListIterator
+		 */
+		ListIterator it = arr_list.listIterator(); // ListIterator 객체 생성
+		
+		System.out.println("ListIterator Next()");
+		System.out.print("arr_list = [ ");
+		while(it.hasNext()) { 
+			/*
+			 * boolean hasNext() : 다음 요소가 존재하는지 확인
+			 * Object next() : 현재 요소를 반환 (반환타입 Object)
+			 */
+			String obj = (String)it.next(); // 추출(형변환)
+			System.out.print(obj + " ");
+		}
+		System.out.println("]");
+
+		System.out.println("ListIterator Previous()");
+		System.out.print("arr_list = [ ");
+		while(it.hasPrevious()) { // 현재 요소의 인덱스를 기준으로 이전 요소가 있다면
+			/*
+			 * boolean hasPrevious() : 이전 요소가 존재하는지 확인
+			 * Object previous() : 이전 요소를 반환 (반환타입 Object)
+			 */
+			String obj = (String)it.previous(); // 추출(형변환)
+			System.out.print(obj + " ");
+		}
+		System.out.println("]");
+		
+		/*
+		 * Iterator
+		 */
+		Iterator arr_it = arr_list.iterator();
+
+		System.out.println("Iterator next()");
+		System.out.print("arr_list = [ ");
+		while(arr_it.hasNext()) {
+			String obj = (String)arr_it.next();
+			System.out.print(obj + " ");
+		}
+		System.out.println("]");
+	}
+}
+```
