@@ -72,16 +72,31 @@
   - JAVA 8 이전 표준 API 제공, 11 이후 JDK가 제공하는 표준 API를 모듈별로 쪼개어 제공
   - 기본적으로 java.base 모듈 사용 가능, 다른 모듈 사용시 모듈 기술자(module-info.java)에 의존성 모듈 등록
 
-<pre>
-  <code>
+```java
 module pro1 { // 모듈 기술자
     requires java.se; 
 }
-  </code>
-</pre>
+```
 
 -----
 ### 자바 주석
 -----
   1. // : 한 줄 주석 (Ctrl + /)
   2. /* */ : 여러 줄 주석 (ctrl + Shift + /)
+
+
+```java
+/* 
+package 패키지명;
+*/
+package pro1;
+
+// class block
+public class Ex01 { // 클래스는 관례상 첫글자는 대문자
+	// main method block
+	public static void main(String[] args) {
+		System.out.println("Hello");
+		System.out.println("java");
+	} // main method block end
+} // class block end
+```
