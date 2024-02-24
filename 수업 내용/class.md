@@ -135,6 +135,16 @@ ReturnType Method_name(Argument..) {
 4. private : 같은 클래스 내에서만 접근 가능
 
         접근범위 : public > protected > (default) > private
+
+5. 클래스에서의 접근 제한자
+
+		A. 필드 : [Access Modifier] [(속성) Modifier] Type field_name[= Initial Value];
+		B. 생성자 : : [Access Modifier] Class_name(argument list) { [Statement;] }
+			- 생성자는 필드의 초기화를 주로 담당
+			- Default Constructor : 기본 생성자로, 매개변수가 없는 기본 생성자 (생성자를 생성하지 않으면 컴파일러 자동으로 추가)
+                        - 매개변수가 있는 생성자를 생성하면, 기본 생성자는 컴파일러에 의해 생성되지 않음 (생성자가 있는 것으로 간주)
+                        - 매개변수가 있는 생성자로 객체를 생성하면, 객체를 생성할 때 그 생성자의 매개변수에 맞게 그 매개변수 순서, 타입, 개수에 맞게 설정해야함
+  		C. 메서드 : [Access Modifier] [(속성) Modifier] ReturnType method_name(argument list) { Statement; return ~; }
 < Book Class >
 
 ```java
@@ -303,9 +313,446 @@ public class Book01_Main {
 	}
 }
 ```
+-----
+### getter와 setter 
+-----
+
+1. getter : 접근 제한자로 제한이 설정된 field의 값을 전달하는 함수 (예) Date Class : getHour(), getMinute())
+2. setter : 접근 제한자로 제한이 설정된 filed의 값을 전달받는 함수 (예) Date Class : setHour(int hour), setMinute(int minutes))
 
 -----
 ### 캡슐화와 정보은닉
 -----
 1. 캡슐화(Encapsulation) : 클래스 안에 서로 연관있는 속성과 기능들을 하나의 캡슐(capsule)로 만들어 데이터를 외부로부터 보호하는 것
 2. 정보 은닉 : 객체 내부 구현을 숨김으로 객체가 반드시 정해진 메소드를 통해 상호작용하도록 유도
+
+-----
+### this
+-----
+1. 객체(인스턴스) 자신의 참조(번지)를 가지고 있는 키워드
+2. 객체 내부에서 인스턴스 멤버임을 확실하게 하기 위해 this. 사용
+3. 매개변수와 필드명이 동일할 때 인스턴스 필드임을 명확하게 하기 위해 사용
+
+-----
+### this()
+-----
+1. 자신의 생성자 호출
+2. 생성자는 또 다른 생성자를 호출할 수 없음 → this()로 호출
+	- 생성자가 오버로딩되면 생성자 간의 중복된 코드가 발생
+	- 초기화 내용이 비슷한 생성자들에서 발생하는 있는 현상으로, 초기화 내용을 한 생성자에 몰아 작성
+	- 다른 생성자는 초기화 내용을 작성한 생성자를 this(..)로 호출 (예제 참고)
+	- 생성자 this()는 항상 첫 문장에 실행되어야 함  (중요)
+
+			생성자 내에서 초기화 작업 도중 다른 생성자를 호출하게 되면, 호출이 다른 생성자 내에서 멤버변수를 초기화 할 것이므로
+   			 다른 생성자를 호출 할 수 있기 때문에 이전 초기화 작업이 무의미해짐 (중요)
+
+<div align = "center">
+<img width="505" alt="img (1)" src="https://github.com/sooyounghan/JAVA/assets/34672301/3bbcf333-9402-4853-8f8c-b21b4f31734b">
+</div>
+
+-----
+### (생성자/메서드) 오버로딩 = (Constructor / Method) Overloading
+-----
+1. 클래스 내 같은 이름의 메소드를 여러 개 선언하는 것
+2. 하나의 메소드 이름으로 다양한 매개변수를 받기 위해 (메소드/생성자)를 오버로딩
+3. 조건 : 매개변수의 개수, 순서, 타입
+4. 동일 클래스 내 생성자 또는 메소드에서 동일한 메소드가 존재해서는 안되는데, 매개변수의 개수나 타입, 순서를 다르게 해서 메소드를 정의하는 것
+
+   		< 생성자 오버로딩 (Constructor Overloading) >
+  		: 객체를 생성할 때 외부값으로 객체를 초기화할 필요가 있으나 외부 값이 어떤 타입으로 몇 개 제공할지 모르므로
+		  생성자 오버로딩을 통해 다양화
+
+< Car01 Class >
+```java
+import java.util.*;
+
+/*
+ * Car Class (자동차 관련 정보, 기능 제공 클래스)
+ */
+
+public class Car01 {
+	/*
+	 * field
+	 *   : [Access Modifier] [(속성) Modifier] Type field_name[= Initial Value];
+	 */
+	
+	// 모든 field에 대해 private 접근 제한자 설정
+	private String brand; // 브랜드 
+	private int price; // 가격
+	private String color; // 색상
+	private double fuel; // 연비
+	private Date mDate; // 제조일자 
+	private char grade; // 등급
+	private boolean isAirbag; // 에어백 장착 유무
+
+	/*
+	 * Constructor : 필드의 초기화를 주로 담당
+	 *   : [Access Modifier] Class_name(argument list) {
+	 *   			[Statement;]
+	 *   	}
+	 *     * Default Constructor : 매개변수가 없는 기본 생성자
+	 *     	  : Car01() { // Default Constructor
+	 *
+  	 *	      }
+	 */
+	
+	Car01() { // Default Constructor
+		this(null, 0, null, 0.0, null, ' ', false); // 매개변수 크기, 타입, 순서에 맞는 오버로딩된 생성자로 이동
+		 // Line 59 생성자 호출
+	}
+	
+	/*
+	 * (Method/Constructor) Overloading(오버로딩)
+	 *   - 동일 클래스 내 생성자 또는 메소드에서 동일한 이름의 메소드가 존재하지 못하는데,
+	 *     매개변수의 개수, 타입, 순서를 다르게 하여 메소드를 정의하는 것
+	 */
+	Car01(String brand) { // 매개변수가 있는 생성자 (=> 기본생성자가 생성되지 않음) (생성자 오버로딩 : Constructor Overloading)
+		this(brand, 0); // Car01(String brand, int price) 호출
+	}
+
+	
+	Car01(String brand, int price) { // 매개변수가 다른 생성자 (생성자 오버로딩 : Constructor Overloading)
+		this(brand, price, null); // Car01(String brand, int price, String color) 호출
+		//this.brand = brand; // brand 값 입력
+		//this.price = price; // price 값 입력
+	}
+	
+	Car01(String brand, int price, String color) { // 매개변수가 3개인 생성자 (생성자 오버로딩 : Constructor Overloading)
+		this(brand, price, color, 0.0, null, ' ', true); // Line 59 생성자 호출
+	}
+	
+	Car01(String brand, int price, String color, double fuel, Date mDate, char grade, boolean isAirbag) {
+		this.brand = brand;
+		this.price = price;
+		this.color = color;
+		this.fuel = fuel;
+		this.mDate = mDate;
+		this.grade = grade;
+		this.isAirbag = isAirbag;
+	}
+	/*
+	 * method 
+	 *   : [Access Modifier] [(속성) Modifier] ReturnType method_name(argument list) {
+	 *   		Statement;
+	 *   		return ~;
+	 *   	}
+	 */
+	
+	/*
+	 * getter와 setter
+	 */
+	
+	// Getter : 접근 제한자로 제한이 설정된 field의 값을 전달해주는 메서드
+	// method 1 : return o, argument x
+	/*
+	 * brand값을 얻어오는 메서드 
+	 */
+	String get_brand() {
+		return brand;
+	}
+	
+	/*
+	 * price값을 얻어오는 메서드
+	 */
+	int get_price() {
+		return price;
+	}
+	
+	/*
+	 * color값을 얻어오는 메서드
+	 */
+	String get_color() {
+		return color;
+	}
+	
+	/*
+	 * fuel값을 얻어오는 메서드
+	 */
+	double get_fuel() {
+		return fuel;
+	}
+	
+	/*
+	 * mDate값을 얻어오는 메서드
+	 */
+	Date get_mDate() {
+		return mDate;
+	}
+	
+	/*
+	 * grade값을 얻어오는 메서드
+	 */
+	char get_grade() {
+		return grade;
+	}
+	
+	/*
+	 * isAirbag값을 얻어오는 메서드
+	 */
+	boolean isAirbag() { // boolean형은 get 표기보다는 is(--) 형태로 표기하는 것이 관례
+		return isAirbag;
+	}
+	
+	// Setter : 접근 제한자로 제한이 설정된 field의 값을 전달받는 메서드
+	// method 2 : return x, argument x
+	/*
+	 * color값을 설정하는 메서드
+	 */
+	void set_color() {
+		color = "Silver"; // color 값을 초기값인 null에서 sliver로 변경
+	}
+	/*
+	 * 매개변수 col 값을 전달받아 color 값을 설정하는 메서드
+	 * method 3 : return x, argument o
+	 */
+	 
+	 /* 	  
+	  *  brand 값을 설정하는 메서드
+	  */  
+	 void set_brand(String bra) {
+	  	   brand = bra; // 매개변수로 전달받은 bra을 brand field에 저장 (메소드를 통해서 저장하므로)
+
+	 }
+	 
+	 /* 	  
+	  *  price 값을 설정하는 메서드
+	  */  
+     void set_price(int pri) {
+  	   	   price = pri; // 매개변수로 전달받은 pri을 price field에 저장 (메소드를 통해서 저장하므로)
+	  	   // 매개변수명과 필드명이 같아질 경우 : price = price;로 작성하게 되면, 매개변수 brand로 인식하게 되어 매개변수에 값 저장
+	  	   // this.brand = brand; 로 작성 (this)
+      }
+     
+     /* 
+      * this 
+	  *  - 객체(인스턴스) 자신의 참조(번지)를 가지고 있는 키워드
+	  *  - 객체 내부에서 인스턴스 멤버임을 확실하게 하기 위해 this. 사용
+      *  - 매개변수와 필드명이 동일할 때 인스턴스 필드임을 명확하게 하기 위해 사용
+      */
+     
+	 /* 	  
+	  *  color 값을 설정하는 메서드
+	  */  
+     void set_color(String color) {
+  	   	   this.color = color; // 매개변수로 전달받은 color을 클래스로부터 생성된 객체(이를 가리키는 this)에 저장 (메소드를 통해서 저장하므로)
+     }
+     
+	 /* 	  
+	  *  fuel 값을 설정하는 메서드
+	  */  
+     void set_fuel(double fuel) {
+  	   	   this.fuel = fuel; // 매개변수로 전달받은 fuel을 클래스로부터 생성된 객체(이를 가리키는 this)에 저장 (메소드를 통해서 저장하므로)
+      }
+     
+	 /* 	  
+	  *  grade 값을 설정하는 메서드
+	  */  
+     void set_grade(char grade) {
+  	   	   this.grade = grade; // 매개변수로 전달받은 grade을 클래스로부터 생성된 객체(이를 가리키는 this)에 저장 (메소드를 통해서 저장하므로)
+      }
+
+	 /* 	  
+	  *  isAirbag 값을 설정하는 메서드
+	  */  
+     void set_isAirbag(boolean isAirbag) {
+  	   	   this.isAirbag = isAirbag; // 매개변수로 전달받은 isAirbag을 클래스로부터 생성된 객체(이를 가리키는 this)에 저장 (메소드를 통해서 저장하므로)
+      }
+
+	/*
+	 *    Date 객체 d의 값을 받아서 설정하는 메서드
+	 */
+	 void set_mDate(Date mDate) {
+	  	   this.mDate = mDate; // Date 객체 mDate를 받아 클래스로부터 생성된 객체(이를 가리키는 this)의 mDate에 참조시킴
+	 }
+	 
+	// Overloading
+	// method 3 : return x, argument o
+	/*
+	 * color값을 설정하는 메서드
+	 */
+	
+	/*
+	 * private field들을 출력하는 method 
+	 */
+	void get_field() {
+		System.out.println("Car Class Brand : " + brand);
+		System.out.println("Car Class Price : " + price);
+		System.out.println("Car Class Color : " + color);
+		System.out.println("Car Class Fuel : " + fuel);
+		System.out.println("Car Class Date : " + mDate);
+		System.out.println("Car Class Grade : " + grade);
+		System.out.println("Car Class Airbag (True : o, False : x) : " + isAirbag);
+	}
+	
+}
+```
+
+< Main >
+```java
+import java.util.Date;
+
+/*
+ * Car Class - Main method
+ */
+public class Car01_Main {
+	public static void main(String[] args) {
+		/*
+		 * Car Class Instance 생성
+		 */
+		Car01 car = new Car01(); // Car01() { } 생성자로 이동 - this(...)로 해당 생성자로 이동
+		// Car01 car = new Car01("C"); // 매개변수가 String brand인 생성자 호출(기본 생성자는 매개변수가 있는 생성자에 의해 컴파일러가 생성하지 않음)
+		// Car01 car = new Car01("B", 1500); // 매개변수가 String brand, int price인 생성자가 호출
+		// Car01 car = new Car01("A", 2500, "White"); // 매개변수가 String brand, int price, String Color인 생성자 호출
+		// Car01 car = new Car01("A", 2500, "White", 0.5, null, 'B', true); // 매개변수가 String brand, int price, String Color인 생성자 호출
+		System.out.println(car); // Car 클래스에서 생성한 객체의 주소 (ch06.Car01[패키지.클래스]@76a3e297[16진수]) : HashCode
+		
+		/*
+		 * Class Field에 private 접근제한자 설정 : field는 Car01 클래스 내에서만 사용 가능하므로 다른 클래스인 Main()에서 사용 불가
+		 *  -> Car01 Class getter method()를 통해 데이터 확인 가능 : 같은 클래스 내에서 사용 가능하므로 이를 이용
+		 */
+		
+		// String brand = car.brand; // brand는 Main method()에서 선언한 변수, car.brand는 car 클래스의 필드
+
+		/*
+		 * System.out.println("Car Brand : " + car.brand); // String 초기값 : null
+		 * System.out.println("Car Price : " + car.price); // int 초기값 : 0
+		 * System.out.println("Car Color : " + car.color); // String 초기값 : null
+		 * System.out.println("Car Fuel : " + car.fuel); // double 초기값 : 0.0
+		 * System.out.println("Car Date : " + car.mDate); // Class의 초기값 : null
+		 * System.out.println("Car Grade : " + car.grade); // char 초기값 : ' '
+		 * System.out.println("Car Airbag (True : o, False : x) : " + car.isAirbag); // boolean 초기값 : false
+		 * 
+		 */
+		
+		// Car class getter 함수
+		car.get_field(); // Car Class private field에 접근하여 값을 얻어오는 메서드 출력
+		System.out.println();
+		System.out.println("------getter method------");
+		System.out.println("Car Class Brand : " + car.get_brand()); // Car Class 내 Brand를 출력해주는 메서드 출력
+		System.out.println("Car Class Price : " + car.get_price()); // Car Class 내 Price를 출력해주는 메서드 출력
+		System.out.println("Car Class Color : " + car.get_color()); // Car Class 내 Color를 출력해주는 메서드 출력
+		System.out.println("Car Class Fuel : " + car.get_fuel()); // Car Class 내 Fuel를 출력해주는 메서드 출력
+		System.out.println("Car Class Date : " + car.get_mDate()); // Car Class 내 mDate를 출력해주는 메서드 출력
+		System.out.println("Car Class Grade : " + car.get_grade()); // Car Class 내 Grade를 출력해주는 메서드 출력
+		System.out.println("Car Class isAirbag(True : o, False : x) : " + car.isAirbag()); // Car Class 내 isAirbag를 출력해주는 메서드 출력
+		
+		System.out.println();
+		System.out.println("------get_color method------");
+		System.out.println("Car Class Color Before : " + car.get_color()); // 변경 전 Car Class 내 Color를 출력해주는 메서드 출력 (null)
+		car.set_color();
+		System.out.println("Car Class Color After : " + car.get_color()); // 변경 후 Car Class 내 Color를 출력해주는 메서드 출력 (Silver)
+		car.set_color("Black");
+		System.out.println("Car Class Color After 2 : " + car.get_color()); // 변경 후 Car Class 내 Color를 출력해주는 메서드 출력 (Silver)
+		System.out.println();
+		
+		// Date Setter Method
+		System.out.println("------setter method------");
+		car.set_brand("A");
+		car.set_price(3000);
+		car.set_fuel(15.9);
+		car.set_grade('B');
+		car.set_isAirbag(true);
+		System.out.println("Car Class Brand After : " + car.get_brand()); // 초기값 : null
+		System.out.println("Car Class Price After : " + car.get_price()); // 초기값 : null
+		System.out.println("Car Class Color After : " + car.get_color()); // 초기값 : null
+		System.out.println("Car Class Fuel After : " + car.get_fuel()); // 초기값 : null
+		System.out.println("Car Class Grade After : " + car.get_grade()); // 초기값 : null
+		System.out.println("Car Class isAirbag After : " + car.isAirbag()); // 초기값 : null
+
+		Date mdate = new Date(); // Date클래스 객체 생성하여 참조변수 mDate에 참조
+		car.set_mDate(mdate); // Date클래스를 통해 생성된 객체를 참조하는 참조변수 mdate를 인자로 Car Class mDate 값으로 설정
+		System.out.println("Car Class Date After : " + car.get_mDate());
+	}
+}
+```
+
+< Car02 Class>
+```java
+public class Car02 {
+	/*
+	 * field
+	 *  = [Access Modifier][Modifier]DateType Field_name[=value];
+	 */
+	String brand; // 브랜드 
+	int price; // 가격
+	double fuel; // 연비
+	
+	/*
+	 * Constructor
+	 *  = [Access Modifier] Class_name(argument_list) {
+	 *
+	 * 		}
+	 */
+	Car02() { // 기본 생성자
+		this(null, 0, 0.0); // Line 22 호출 (this() 생성자)
+	}
+	
+	Car02(String brand) { // 매개변수 1개(brand) 생성자
+		this(brand, 0, 0.0); // Line 27 호출 (this() 생성자)
+	}
+	
+	Car02(String brand, int price) { // 매개변수 2개(brand, price) 생성자
+		this(brand, price, 0.0); // Line 30 호출 (this() 생성자)
+	}
+	
+	Car02(String brand, int price, double fuel) { // 매개변수 3개(brand, price, fuel) 생성자
+		this.brand = brand;
+		this.price = price;
+		this.fuel = fuel;  // 엄연히 따지면, 최종 초기화를 시켜주는 생성자
+	}
+    
+    	Car02(int price, String brand, double fuel) { // 매개변수 3개(brand, price, fuel)이나 Line 30과 매개변수 순서가 다르므로 생성자 오버로딩
+		this.brand = brand;
+		this.price = price;
+		this.fuel = fuel;  // 엄연히 따지면, 최종 초기화를 시켜주는 생성자
+	}
+    
+	/*
+	 * method
+	 *   = [Access Modifier][Modifier] Method_name(argument_list) {
+	 * 			Statement;
+	 * 			return ~;
+	 * 		}
+
+	 */
+}
+```
+
+< Car02 Main >
+```java
+package ch06;
+
+/*
+ * Car02 Class Main
+ */
+public class Car02_Main {
+	public static void main(String[] args) {
+		Car02 car = new Car02(); // Car02 Class의 Car02() 생성자 실행
+		Car02 car_1 = new Car02("A"); // Car02 Class의 Car02(String brand) 생성자 실행
+		Car02 car_2 = new Car02("B", 2300); // Car02 Class의 Car02(String brand, int price) 생성자 실행
+		Car02 car_3 = new Car02("C", 2400, 0.4); // Car02 Class의 Car02(String brand, int price, double fuel) 생성자 실행
+		
+		System.out.println("------------Car02 Constructor()---------------");
+		System.out.println("Car02() brand = " + car.brand);
+		System.out.println("Car02() price = " + car.price);
+		System.out.println("Car02() fuel = " + car.fuel);
+		System.out.println();
+		System.out.println("------------Car02 Constructor(String brand)---------------");
+		System.out.println("Car02(String brand) brand = " + car_1.brand);
+		System.out.println("Car02(String brand) price = " + car_1.price);
+		System.out.println("Car02(String brand) fuel = " + car_1.fuel);
+		System.out.println();
+		System.out.println("------------Car02 Constructor(String brand, int price)---------------");
+		System.out.println("Car02(String brand, int price) brand = " + car_2.brand);
+		System.out.println("Car02(String brand, int price) price = " + car_2.price);
+		System.out.println("Car02(String brand, int price) fuel = " + car_2.fuel);
+		System.out.println();
+		System.out.println("------------Car02 Constructor(String brand, int price, double fuel)---------------");	
+		System.out.println("Car02(String brand, int price, double fuel) brand = " + car_3.brand);
+		System.out.println("Car02(String brand, int price, double fuel) price = " + car_3.price);
+		System.out.println("Car02(String brand, int price, double fuel) fuel = " + car_3.fuel);
+		System.out.println();
+	}
+}
+```
+
