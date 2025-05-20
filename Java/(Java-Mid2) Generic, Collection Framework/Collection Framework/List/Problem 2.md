@@ -2,10 +2,10 @@
 ### 문제와 풀이2
 -----
 1. 문제 - 리스트를 사용한 쇼핑 카트
-  - ShoppingCartMain 코드가 작동하도록 ShoppingCart 클래스를 완성
-  - ShoppingCart 는 내부에 리스트를 사용
+   - ShoppingCartMain 코드가 작동하도록 ShoppingCart 클래스를 완성
+   - ShoppingCart 는 내부에 리스트를 사용
 
-  - Item 클래스 (/collection/list/test/ex2)
+   - Item 클래스 (/collection/list/test/ex2)
 ```java
 package collection.list.test.ex2;
 public class Item {
@@ -28,7 +28,7 @@ public class Item {
     }
 }
 ```
-  - ShoppingCartMain
+   - ShoppingCartMain
 ```java
 package collection.list.test.ex2;
 
@@ -45,7 +45,7 @@ public class ShoppingCartMain {
     }
 }
 ```
-  - ShoppingCart
+   - ShoppingCart
 ```java
 package collection.list.test.ex2;
 
@@ -79,11 +79,11 @@ public class ShoppingCart {
 }
 ```
 
-  - 배열과 비교한 리스트의 이점
-    + 자료 구조의 크기가 동적으로 증가
-    + 따라서 배열처럼 입력 가능한 크기를 미리 정하지 않아도 됨
-    + itemCount 와 같이 배열에 몇게의 데이터가 추가 되었는지 추척하는 변수를 제거할 수 있음
-    + 리스트는 size() 메서드를 통해 입력된 데이터의 크기를 제공
+   - 배열과 비교한 리스트의 이점
+     + 자료 구조의 크기가 동적으로 증가
+     + 따라서 배열처럼 입력 가능한 크기를 미리 정하지 않아도 됨
+     + itemCount와 같이 배열에 몇게의 데이터가 추가 되었는지 추척하는 변수를 제거할 수 있음
+     + 리스트는 size() 메서드를 통해 입력된 데이터의 크기를 제공
 
 2. 참고 - 배열을 사용한 코드와 비교
 ```java
