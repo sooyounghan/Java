@@ -16,7 +16,7 @@
 </div>
 
   - 블록은 1 → 2 → 3 순서대로 넣는다고 가정
-  - 넣은 블록을 뺀다고 가
+  - 넣은 블록을 뺀다고 가정
 <div align="center">
 <img src="https://github.com/user-attachments/assets/811bc00b-1e19-4e6c-8c3a-c532ec66a9f5">
 </div>
