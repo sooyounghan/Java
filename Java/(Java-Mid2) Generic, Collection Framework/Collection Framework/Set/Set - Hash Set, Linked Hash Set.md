@@ -43,7 +43,7 @@
    - hashCode() , equals() 를 모두 사용
 
 7. LinkedHashSet
-   - 구현 : LinkedHashSet 은 HashSet 에 연결 리스트를 추가해서 요소들의 순서를 유지
+   - 구현 : LinkedHashSet은 HashSet에 연결 리스트를 추가해서 요소들의 순서를 유지
    - 순서 : 요소들은 추가된 순서대로 유지. 즉, 순서대로 조회 시 요소들이 추가된 순서대로 반환
    - 시간 복잡도 : LinkedHashSet도 HashSet 과 마찬가지로 주요 연산에 대해 평균 O(1) 시간 복잡도를 가짐
    - 용도 : 데이터의 유일성과 함께 삽입 순서를 유지해야 할 때 적합
