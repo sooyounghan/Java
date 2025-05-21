@@ -84,7 +84,7 @@ public class CommonKeyValueSum1 {
   - Map.of()를 사용해서 생성한 Map은 불변
   - 따라서 내용을 변경할 수 없음
 
-3. 문제 3 - 같은 단어가 나타난 
+3. 문제 3 - 같은 단어가 나타난 수
    - 각각의 단어가 나타난 수를 출력
    - WordFrequencyTest1
 ```java
