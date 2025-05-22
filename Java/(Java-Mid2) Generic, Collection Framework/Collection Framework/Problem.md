@@ -7,7 +7,7 @@
     + ♥ : 하트
     + ◆ : 다이아
     + ♣ : 클로버
-  - 예) 1(♠), 1(♥), 1(◆), 1(♣), 2(♠), 2(♥), 2(◆), 2(♣) ... 13(♠), 13(♥), 13(䡫◆), 13(♣)
+  - 예) 1(♠), 1(♥), 1(◆), 1(♣), 2(♠), 2(♥), 2(◆), 2(♣) ... 13(♠), 13(♥), 13(◆), 13(♣)
   - 따라서 13 * 4 = 총 52장의 카드가 존재
   - 52장의 카드가 있는 카드 뭉치를 덱(Deck)
   - 2명의 플레이어(Player)가 게임을 진행
@@ -185,5 +185,39 @@ public class Player {
 
 8. CardGameMain
 ```java
+package collection.compare.test;
 
+public class CardGameMain {
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        Player player1 = new Player("플레이어1");
+        Player player2 = new Player("플레이어2");
+        
+        for(int i = 0; i < 5; i++) {
+            player1.drawCard(deck);
+            player2.drawCard(deck);
+        }
+        
+        player1.showHand();
+        player2.showHand();
+
+        Player winner = getWinner(player1, player2);
+        if(winner != null) {
+            System.out.println(winner.getName() + " 승리");
+        }
+    }
+
+    private static Player getWinner(Player player1, Player player2) {
+        int sum1 = player1.rankSum();
+        int sum2 = player2.rankSum();
+        
+        if(sum1 > sum2) {
+            return player1;
+        } else if (sum1 == sum2) {
+            return null;
+        } else {
+            return player2;
+        }
+    }
+}
 ```
