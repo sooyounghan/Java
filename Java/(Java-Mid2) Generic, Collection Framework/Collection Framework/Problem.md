@@ -136,7 +136,7 @@ public class Deck {
     }
 
     public Card drawCard() {
-        return cards.remove(0);
+        return cards.remove(0); // Java 21 이상 : removeFirst() 권장
     }
 }
 ```
