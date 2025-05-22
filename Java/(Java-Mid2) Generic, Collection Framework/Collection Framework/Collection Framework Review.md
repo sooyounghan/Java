@@ -47,7 +47,7 @@
         * 예) ArrayList, LinkedList
      + Set : 중복 요소를 허용하지 않는 컬렉션을 나타냄, 특정 위치가 없기 때문에 인덱스를 통해 요소에 접근할 수 없음
         * 예) HashSet, LinkedHashSet, TreeSet
-     + Queue: 요소가 처리되기 전에 보관되는 컬렉션을 나타낸다.
+     + Queue : 요소가 처리되기 전에 보관되는 컬렉션
         * 예) ArrayDeque, LinkedList, PriorityQueue
      + Map: 키와 값 쌍으로 요소를 저장하는 객체, Map은 Collection 인터페이스를 상속받지 않음
         * 예) HashMap, LinkedHashMap, TreeMap
@@ -79,6 +79,6 @@
 
 6. 실무 선택 가이드
     - List 의 경우 대부분 ArrayList 를 사용
-    - LSet 의 경우 대부분 HashSet 을 사용
-    - LMap 의 경우 대부분 HashMap 을 사용
-    - LQueue 의 경우 대부분 ArrayDeque 를 사용
+    - Set 의 경우 대부분 HashSet 을 사용
+    - Map 의 경우 대부분 HashMap 을 사용
+    - Queue 의 경우 대부분 ArrayDeque 를 사용
