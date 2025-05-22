@@ -78,7 +78,7 @@
       + 참고: PriorityQueue는 큐에 입력하는 요소에 우선순위를 부여할 수 있음
 
 6. 실무 선택 가이드
-    - List 의 경우 대부분 ArrayList 를 사용
-    - Set 의 경우 대부분 HashSet 을 사용
-    - Map 의 경우 대부분 HashMap 을 사용
-    - Queue 의 경우 대부분 ArrayDeque 를 사용
+    - List 의 경우 대부분 ArrayList를 사용
+    - Set 의 경우 대부분 HashSet을 사용
+    - Map 의 경우 대부분 HashMap을 사용
+    - Queue 의 경우 대부분 ArrayDeque를 사용
