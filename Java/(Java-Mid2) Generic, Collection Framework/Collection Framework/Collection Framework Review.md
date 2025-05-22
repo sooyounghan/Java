@@ -48,9 +48,9 @@
      + Set : 중복 요소를 허용하지 않는 컬렉션을 나타냄, 특정 위치가 없기 때문에 인덱스를 통해 요소에 접근할 수 없음
         * 예) HashSet, LinkedHashSet, TreeSet
      + Queue: 요소가 처리되기 전에 보관되는 컬렉션을 나타낸다.
-        * 예) ArrayDeque , LinkedList , PriorityQueue
-     + Map: 키와 값 쌍으로 요소를 저장하는 객체이다. Map 은 Collection 인터페이스를 상속받지 않는다.
-        * 예) HashMap , LinkedHashMap , TreeMap
+        * 예) ArrayDeque, LinkedList, PriorityQueue
+     + Map: 키와 값 쌍으로 요소를 저장하는 객체, Map은 Collection 인터페이스를 상속받지 않음
+        * 예) HashMap, LinkedHashMap, TreeMap
 
    - 구현 : 자바는 각 인터페이스의 여러 구현을 제공
      + List: ArrayList는 내부적으로 배열을 사용하며, LinkedList는 연결 리스트를 사용
@@ -75,7 +75,7 @@
    - 요소를 처리하기 전에 보관해야 하는 경우 : Queue , Deque 인터페이스를 사용
       + 스택, 큐 구조 모두 ArrayDeque 를 사용하는 것이 가장 빠름
       + 만약 우선순위에 따라 요소를 처리해야 한다면 PriorityQueue를 고려
-      + 참고: PriorityQueue 는 자주 사용하지 않아서 따로 설명하지 않았다. 큐에 입력하는 요소에 우선순위를 부여할 수 있음
+      + 참고: PriorityQueue는 큐에 입력하는 요소에 우선순위를 부여할 수 있음
 
 6. 실무 선택 가이드
     - List 의 경우 대부분 ArrayList 를 사용
