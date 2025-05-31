@@ -2,15 +2,15 @@
 ### 문제와 풀이
 -----
 1. 문제 : 영화 리뷰 관리하기 1
-  - 문제 설명 : 영화 리뷰 정보를 관리하려고 함
-  - 먼저, 영화 리뷰 정보를 담을 수 있는 MovieReview 클래스를 생성
-  - 요구 사항
-    + MovieReview 클래스는 다음과 같은 멤버 변수를 포함해야 함
-       * 영화 제목 (title)
-       * 리뷰 내용 (review)
-    + MovieReviewMain 클래스 안에 main() 메서드를 포함하여, 영화 리뷰 정보를 선언하고 출력
+   - 문제 설명 : 영화 리뷰 정보를 관리하려고 함
+   - 먼저, 영화 리뷰 정보를 담을 수 있는 MovieReview 클래스를 생성
+   - 요구 사항
+     + MovieReview 클래스는 다음과 같은 멤버 변수를 포함해야 함
+        * 영화 제목 (title)
+        * 리뷰 내용 (review)
+     + MovieReviewMain 클래스 안에 main() 메서드를 포함하여, 영화 리뷰 정보를 선언하고 출력
 
-  - MovieReview (/class1/ex)
+   - MovieReview (/class1/ex)
 ```java
 package class1.ex;
 
@@ -47,9 +47,9 @@ public class MovieReviewMain2 {
 ```
 
 2. 문제 : 영화 리뷰 관리하기 2
-   - 기존 문제에 배열을 도입하고, 영화 리뷰를 배열에 관리
-   - 리뷰를 출력할 때 배열과 for 문을 사용해서 System.out.println 을 한번만 사용
-   - MovieReviewMain2
+    - 기존 문제에 배열을 도입하고, 영화 리뷰를 배열에 관리
+    - 리뷰를 출력할 때 배열과 for 문을 사용해서 System.out.println 을 한번만 사용
+    - MovieReviewMain2
 ```java
 package class1.ex;
 
@@ -79,16 +79,16 @@ public class MovieReviewMain2 {
 ```
 
 3. 문제 : 상품 주문 시스템 개발
-   - 문제 설명 : 온라인 상점의 주문 관리 시스템을 만들려고 함
-      + 먼저, 상품 주문 정보를 담을 수 있는 ProductOrder 클래스를 생성
-   - 요구 사항
-      + ProductOrder 클래스는 다음과 같은 멤버 변수를 포함해야 함
-        * 상품명 (productName)
-        * 가격 (price)
-        * 주문 수량 (quantity)
+    - 문제 설명 : 온라인 상점의 주문 관리 시스템을 만들려고 함
+       + 먼저, 상품 주문 정보를 담을 수 있는 ProductOrder 클래스를 생성
+    - 요구 사항
+       + ProductOrder 클래스는 다음과 같은 멤버 변수를 포함해야 함
+         * 상품명 (productName)
+         * 가격 (price)
+         * 주문 수량 (quantity)
 
-      + ProductOrderMain 클래스 안에 main() 메서드를 포함하여, 여러 상품의 주문 정보를 배열로 관리하고, 그 정보들을 출력하고, 최종 결제 금액을 계산하여 출력
-      + 출력 예시와 같도록 출력하면 된다.
+       + ProductOrderMain 클래스 안에 main() 메서드를 포함하여, 여러 상품의 주문 정보를 배열로 관리하고, 그 정보들을 출력하고, 최종 결제 금액을 계산하여 출력
+       + 출력 예시와 같도록 출력
 
    - ProductOrder
 ```java
