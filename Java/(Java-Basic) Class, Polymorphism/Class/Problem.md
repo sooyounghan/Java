@@ -48,7 +48,7 @@ public class MovieReviewMain2 {
 
 2. 문제 : 영화 리뷰 관리하기 2
     - 기존 문제에 배열을 도입하고, 영화 리뷰를 배열에 관리
-    - 리뷰를 출력할 때 배열과 for 문을 사용해서 System.out.println 을 한번만 사용
+    - 리뷰를 출력할 때 배열과 for 문을 사용해서 System.out.println()을 한번만 사용
     - MovieReviewMain2
 ```java
 package class1.ex;
