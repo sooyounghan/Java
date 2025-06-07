@@ -111,7 +111,7 @@ public class NestedEx1 {
 2. 문제 : 피라미드 출력
    - int rows를 선언할 것
    - 이 수만큼 다음과 같은 피라미드를 출력
-   - 참고 : println( 은 출력후 다음 라인으로 넘어감, 라인을 넘기지 않고 출력하려면 print()를 사용하면 됨
+   - 참고 : println() 은 출력후 다음 라인으로 넘어감, 라인을 넘기지 않고 출력하려면 print()를 사용하면 됨
      예 ) System.out.print("*")
    - NestedEx2
 ```java
