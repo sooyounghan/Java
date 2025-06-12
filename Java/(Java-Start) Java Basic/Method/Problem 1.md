@@ -43,6 +43,7 @@ public class MethodEx1 {
         int x = 15;
         int y = 25;
         int z = 35;
+
         System.out.println("평균값: " + average(x, y, z));
     }
 
