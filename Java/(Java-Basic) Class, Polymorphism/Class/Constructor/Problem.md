@@ -58,3 +58,10 @@ public class BookMain {
     }
 }
 ```
+
+   - 실행 결과
+```
+제목 : , 저자 : , 페이지 : 0
+제목 : Hello Java, 저자 : Seo, 페이지 : 0
+제목 : JPA 프로그래밍, 저자 : Kim, 페이지 : 700
+```
