@@ -55,8 +55,8 @@ public class CarMain {
 
   - 요구사항
     + MathArrayUtils은 객체를 생성하지 않고 사용
-    + 누군가 실수로 MathArrayUtils 의 인스턴스를 생성하지 못하게 방지
-    + 실행 코드에 static import 를 사용해도 무방
+    + 누군가 실수로 MathArrayUtils의 인스턴스를 생성하지 못하게 방지
+    + 실행 코드에 static import를 사용해도 무방
 
   - MathArrayUtils
 ```java
