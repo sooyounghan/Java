@@ -63,6 +63,10 @@ public class CarMain {
 package static2.ex;
 
 public class MathArrayUtils {
+    private MathArrayUtils() {
+        // private로 설정해 인스턴스 생성 방지
+    }
+    
     public static int sum(int[] values) {
         int total = 0;
 
