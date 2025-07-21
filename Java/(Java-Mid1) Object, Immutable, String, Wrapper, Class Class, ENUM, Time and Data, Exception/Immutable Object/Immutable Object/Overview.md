@@ -1,4 +1,4 @@
-<img width="2014" height="942" alt="10" src="https://github.com/user-attachments/assets/dc97bbf7-c8a1-4ba7-9f7c-c6c42624912f" />-----
+-----
 ### 불변 객체 - 도입
 -----
 1. 공유된 객체의 값을 변경한 것에 문제가 발생
@@ -96,19 +96,19 @@ b = ImmutableAddress{value='부산'}
 ```
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/6c1bfd5c-e91b-4b5c-87ca-105e13fb75f0">
+<img src="https://github.com/user-attachments/assets/57842842-a953-49ed-a3df-ec3015b835b8">
 </div>
 
    - 자바에서 객체의 공유 참조는 막을 수 없음
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/c03cf810-7ac8-445e-80c8-5b307f7e0b13">
+<img src="https://github.com/user-attachments/assets/6c1bfd5c-e91b-4b5c-87ca-105e13fb75f0">
 </div>
 
    - ImmutableAddress는 불변 객체이므로, 따라서 값을 변경할 수 없음
 
 <div align="center">
-<img src="https://github.com/user-attachments/assets/00bed039-e13d-4025-a065-a2e2370c0182">
+<img src="https://github.com/user-attachments/assets/c03cf810-7ac8-445e-80c8-5b307f7e0b13">
 </div>
 
    - ImmutableAddress은 불변 객체이므로 b가 참조하는 인스턴스의 값을 서울에서 부산으로 변경하려면 새로운 인스턴스를 생성해서 할당해야 함
