@@ -51,7 +51,7 @@ public class ClassMetaMain {
     }
 }
 ```
-   - class vs clazz - class는 자바의 예약어다 : 따라서 패키지명, 변수명으로 사용할 수 없음
+   - class vs clazz - class는 자바의 예약어 : 따라서 패키지명, 변수명으로 사용할 수 없음
        + 이런 이유로 자바 개발자들은 class 대신 clazz라는 이름을 관행으로 사용
        + clazz는 class와 유사하게 들리고, 이 단어가 class를 의미한다는 것을 쉽게 알 수 있음
 
