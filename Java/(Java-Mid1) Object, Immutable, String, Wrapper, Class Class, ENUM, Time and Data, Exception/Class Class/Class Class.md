@@ -28,10 +28,8 @@ public class ClassMetaMain {
 
         // 모든 필드 출력
         Field[] fields = clazz.getDeclaredFields();
-
         for (Field field : fields) {
             System.out.println("Field = " + field.getType() + " " + field.getName());
-
         }
 
         // 모든 메서드 출력
