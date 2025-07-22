@@ -2,7 +2,7 @@
 ### 문제와 풀이 1
 -----
 1. 문제 1 - parseInt()
-  - 문제 설명 : 문자로 입력된 str1 , str2 두 수의 합을 구할 것
+  - 문제 설명 : 문자로 입력된 str1, str2 두 수의 합을 구할 것
   - WraaperTest1 (/lang/wrapper/test)
 ```java
 package lang.wrapper.test;
