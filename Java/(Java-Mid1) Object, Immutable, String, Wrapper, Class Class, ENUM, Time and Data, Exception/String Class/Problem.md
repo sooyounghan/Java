@@ -44,21 +44,12 @@ public class TestString2 {
 ```
   - 실행 결과
 ```
-package lang.string.test;
-
-public class TestString2 {
-    public static void main(String[] args) {
-        String[] arr = {"hello", "java", "jvm", "spring", "jpa"};
-
-        int sum = 0;
-        for (String string : arr) {
-            System.out.println(string + " : " + string.length());
-            sum += string.length();
-        }
-
-        System.out.println("sum = " + sum);
-    }
-}
+hello : 5
+java:  4
+jvm : 3
+spring : 6
+jpa : 3
+sum = 21
 ```
 
 3. 문제3 - indexOf()
