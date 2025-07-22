@@ -26,7 +26,7 @@ public class ClassMetaMain {
 
         // Class clazz = class.forName("java.lang.String"); // 3. 문자열로 조히
 
-        // 모든 필즈 출력
+        // 모든 필드 출력
         Field[] fields = clazz.getDeclaredFields();
 
         for (Field field : fields) {
