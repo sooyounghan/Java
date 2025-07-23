@@ -57,9 +57,10 @@ public class LocalOuterV1 {
 ```
    - 실행 결과
 ```
-value = 3
-this.value = 2
-ShadowingMain.this.value = 1
+value = 0
+localVar = 1
+paramVar = 2
+outInstanceVar = 3
 ```
    - 지역 클래스의 접근 범위
       + 자신의 인스턴스 변수인 value에 접근할 수 있음
