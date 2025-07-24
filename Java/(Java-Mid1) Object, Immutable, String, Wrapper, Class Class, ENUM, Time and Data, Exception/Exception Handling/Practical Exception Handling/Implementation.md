@@ -249,4 +249,4 @@ at exception.ex4.MainV4.main(MainV4.java:22)
 프로그램을 정상 종료합니다.
 ```
    - 실행 결과를 보면 공통 예외 처리가 잘 적용된 것을 확인할 수 있음
-   - 추가로 "error2"의 경우 SendExceptionV4이발생하면서 [전송 오류]... 라는 추가 로그가 남은 것도 확인할 수 있음
+   - 추가로 "error2"의 경우 SendExceptionV4이 발생하면서 [전송 오류]... 라는 추가 로그가 남은 것도 확인할 수 있음
