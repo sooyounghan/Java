@@ -2,8 +2,8 @@
 ### 날짜와 시간 조회하고 조작하기 1
 -----
 1. 날짜와 시간 조회하기
-   - 날짜와 시간을 조회하려면 날짜와 시간 항목중에 어떤 필드를 조회할 지 선택
-   - 이 때 날짜와 시간의 필드를 뜻 하는 ChronoField 사용
+   - 날짜와 시간을 조회하려면 날짜와 시간 항목중에 어떤 필드를 조회할지 선택
+   - 이 때 날짜와 시간의 필드를 뜻하는 ChronoField 사용
    - GetTimeMain
 ```java
 package time;
@@ -65,7 +65,7 @@ SECOND_OF_DAY = 48659
 
   - 편의 메서드 사용
     + get(TemporalField field)을 사용하면 코드가 길어지고 번거롭기 때문에 자주 사용하는 조회 필드는 간단한 편의 메서드를 제공
-    + dt.get(ChronoField.DAY_OF_MONTH)) dt.getDayOfMonth()
+    + dt.get(ChronoField.DAY_OF_MONTH)) → dt.getDayOfMonth()
 
   - 편의 메서드에 없음
     + 자주 사용하지 않는 특별한 기능은 편의 메서드를 제공하지 않음
