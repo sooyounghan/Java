@@ -22,7 +22,7 @@ public class FormattingMain1 {
         // 파싱 : 문자를 날짜로
         String input = "2030년 01월 01일";
         LocalDate parsedDate = LocalDate.parse(input, formatter);
-        System.out.println("문자열 파싱 날짜와 시간 = " +parsedDate);
+        System.out.println("문자열 파싱 날짜와 시간 = " + parsedDate);
     }
 }
 ```
